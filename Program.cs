@@ -15,7 +15,7 @@ builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(conne
 
 builder.Services.AddCors(options => options.AddPolicy("MangaPolicy",
     builder => {
-        builder.WithOrigins("http://localhost:5037", "http://localhost:3000", "http://localhost:3001")
+        builder.WithOrigins("http://localhost:5037", "http://localhost:3000", "http://localhost:3001", "https://mangadictionapi.azurewebsites.net/")
         .AllowAnyHeader()
         .AllowAnyMethod();
     }
