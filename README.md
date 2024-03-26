@@ -20,11 +20,9 @@ Controllers Folder:
 Services Folder:
 - Context Folder
     - DataContext file (???)
-
 - User Service
 - Password Service
     -Hash and Salt
-
 - Club Service
 - Posts Service
 - Favorites Service
@@ -48,4 +46,11 @@ What are DTOs?
 
 Models:
     Refers to the representation of data that is used within the application. 
+
+
+Azure:
+- Database name: MangaDictionDb
+- Server name: mangadiction
+- Server Admin Login: MangaLogin
+- Password: Diction123!
 
