@@ -74,3 +74,4 @@ C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\obj\Debug\ne
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\obj\Debug\net7.0\fullstackbackend.pdb
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\obj\Debug\net7.0\fullstackbackend.genruntimeconfig.cache
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\obj\Debug\net7.0\ref\fullstackbackend.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
