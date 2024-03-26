@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\danny\\Documents\\CSA23_24\\fullstackbackend\\fullstackbackend.csproj": {}
+    "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\danny\\Documents\\CSA23_24\\fullstackbackend\\fullstackbackend.csproj": {
+    "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\danny\\Documents\\CSA23_24\\fullstackbackend\\fullstackbackend.csproj",
+        "projectUniqueName": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj",
         "projectName": "fullstackbackend",
-        "projectPath": "C:\\Users\\danny\\Documents\\CSA23_24\\fullstackbackend\\fullstackbackend.csproj",
-        "packagesPath": "C:\\Users\\danny\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\danny\\Documents\\CSA23_24\\fullstackbackend\\obj\\",
+        "projectPath": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj",
+        "packagesPath": "C:\\Users\\Halley\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\danny\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Halley\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
