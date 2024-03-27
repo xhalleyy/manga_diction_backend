@@ -15,9 +15,9 @@ namespace manga_diction_backend.Models
         public string? Description { get; set; }
         public bool IsPublic { get; set; }
         // separated by commas in endpoint
-        public string? Members { get; set; }
+        // public List<MemberModel>? Members { get; set; }
         public bool IsDeleted { get; set; }
-        public List<PostModel>? Posts { get; set; }
+        // public List<PostModel>? Posts { get; set; }
         
         public ClubModel(){}
     }

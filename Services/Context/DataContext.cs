@@ -10,19 +10,36 @@ namespace manga_diction_backend.Services.Context
 {
     public class DataContext : DbContext
     {
-        public DbSet<UserModel> UserInfo {get; set;}
-        public DbSet<ClubModel> ClubInfo {get; set;}
-        public DbSet<PostModel> PostInfo {get; set;}
-        public DbSet<FavoritedModel> FavoritesInfo {get; set;}
-        public DbSet<CommentModel> CommentInfo {get; set;}
+        public DbSet<UserModel> UserInfo { get; set; }
+        public DbSet<ClubModel> ClubInfo { get; set; }
+        public DbSet<PostModel> PostInfo { get; set; }
+        public DbSet<FavoritedModel> FavoritesInfo { get; set; }
+        public DbSet<CommentModel> CommentInfo { get; set; }
+        public DbSet<FriendModel> FriendInfo { get; set; }
+        public DbSet<MemberModel> MemberInfo { get; set; }
 
         // DbContextOptions options in the constructor allows you to configure the context when it's created, such as specifying the database provider, connection string, etc.
-        public DataContext(DbContextOptions options): base(options){}
+        public DataContext(DbContextOptions options) : base(options) { }
 
         // protected override void OnModelCreating(ModelBuilder modelBuilder) is a method where you can configure the database model, including entity relationships, table names, constraints, etc., using the provided ModelBuilder instance.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // modelBuilder.Entity<UserModel>()
+            // .HasMany(u => u.FavoritedMangas)
+            // .WithOne()
+            // .HasForeignKey(f => f.UserId);
+
+            // modelBuilder.Entity<UserModel>()
+            // .HasMany(u => u.FriendList)
+            // .WithOne()
+            // .HasForeignKey(f => f.UserId);
+
+            // modelBuilder.Entity<ClubModel>()
+            // .HasMany(c => c.Members).WithOne()
+            // .HasForeignKey(f => f.ClubId);
+          
         }
     }
 }

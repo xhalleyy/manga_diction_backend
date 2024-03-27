@@ -42,6 +42,9 @@ namespace manga_diction_backend.Services
                 newUser.Age = UserToAdd.Age;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
+                // newUser.FriendList = new List<FriendModel>();
+                // newUser.FavoritedMangas = new List<FavoritedModel>();
+                // newUser.Clubs = new List<ClubModel>();
 
                 _context.Add(newUser);
 

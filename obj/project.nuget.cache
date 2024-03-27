@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8rw9kH3k03uvR0Zl7AXv6rL7QiU/2KLHVvcOeyPSqXECvb6acBvooXdX8bjbB0zC9kGI/fpTx3Nc+svMXltmUw==",
+  "dgSpecHash": "WYZ1OVBecbgRs1V4XnxR/YjZwxSV7lVP0BOf0SKgI8TKG1XjS1fZ2MVLS/MsPQyvGJuSgqVL99c13WIzn9BimA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj",
+  "projectFilePath": "C:\\Users\\Halley\\Documents\\CodeStack\\manga_diction_backend\\fullstackbackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Halley\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Halley\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

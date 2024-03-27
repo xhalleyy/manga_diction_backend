@@ -48,15 +48,7 @@ namespace fullstackbackend.Migrations
                     b.Property<int?>("LeaderId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Members")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserModelID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UserModelID");
 
                     b.ToTable("ClubInfo");
                 });
@@ -69,13 +61,13 @@ namespace fullstackbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("CommentModelID")
+                    b.Property<int?>("CommentId")
                         .HasColumnType("int");
 
                     b.Property<int>("Likes")
                         .HasColumnType("int");
 
-                    b.Property<int>("PostId")
+                    b.Property<int?>("PostId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reply")
@@ -85,8 +77,6 @@ namespace fullstackbackend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("CommentModelID");
 
                     b.ToTable("CommentInfo");
                 });
@@ -108,14 +98,47 @@ namespace fullstackbackend.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserModelID")
+                    b.HasKey("ID");
+
+                    b.ToTable("FavoritesInfo");
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.FriendModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("FriendId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UserModelID");
+                    b.ToTable("FriendInfo");
+                });
 
-                    b.ToTable("FavoritesInfo");
+            modelBuilder.Entity("manga_diction_backend.Models.MemberModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClubId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MemberInfo");
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.PostModel", b =>
@@ -128,9 +151,6 @@ namespace fullstackbackend.Migrations
 
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ClubModelID")
-                        .HasColumnType("int");
 
                     b.Property<string>("DateCreated")
                         .HasColumnType("nvarchar(max)");
@@ -158,8 +178,6 @@ namespace fullstackbackend.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ClubModelID");
-
                     b.ToTable("PostInfo");
                 });
 
@@ -177,9 +195,6 @@ namespace fullstackbackend.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FriendList")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Hash")
                         .HasColumnType("nvarchar(max)");
 
@@ -195,51 +210,6 @@ namespace fullstackbackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("UserInfo");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.ClubModel", b =>
-                {
-                    b.HasOne("manga_diction_backend.Models.UserModel", null)
-                        .WithMany("Clubs")
-                        .HasForeignKey("UserModelID");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.CommentModel", b =>
-                {
-                    b.HasOne("manga_diction_backend.Models.CommentModel", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("CommentModelID");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.FavoritedModel", b =>
-                {
-                    b.HasOne("manga_diction_backend.Models.UserModel", null)
-                        .WithMany("FavoritedMangas")
-                        .HasForeignKey("UserModelID");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.PostModel", b =>
-                {
-                    b.HasOne("manga_diction_backend.Models.ClubModel", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("ClubModelID");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.ClubModel", b =>
-                {
-                    b.Navigation("Posts");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.CommentModel", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("manga_diction_backend.Models.UserModel", b =>
-                {
-                    b.Navigation("Clubs");
-
-                    b.Navigation("FavoritedMangas");
                 });
 #pragma warning restore 612, 618
         }

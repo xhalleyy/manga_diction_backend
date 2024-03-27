@@ -3961,11 +3961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj",
+      "projectUniqueName": "C:\\Users\\Halley\\Documents\\CodeStack\\manga_diction_backend\\fullstackbackend.csproj",
       "projectName": "fullstackbackend",
-      "projectPath": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\fullstackbackend.csproj",
+      "projectPath": "C:\\Users\\Halley\\Documents\\CodeStack\\manga_diction_backend\\fullstackbackend.csproj",
       "packagesPath": "C:\\Users\\Halley\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Halley\\Documents\\CodeStack\\FullStack\\manga_diction_backend\\obj\\",
+      "outputPath": "C:\\Users\\Halley\\Documents\\CodeStack\\manga_diction_backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Halley\\AppData\\Roaming\\NuGet\\NuGet.Config"
