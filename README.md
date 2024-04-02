@@ -1,5 +1,8 @@
 ### MANGA DICTION BACKEND
 
+https://mangadictionapi.azurewebsites.net/ 
+
+
 Requirements/ Pages:
 - Login and Sign Up Page
 - Home Page
