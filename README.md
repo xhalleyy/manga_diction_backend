@@ -13,6 +13,7 @@ Requirements/ Pages:
 Controllers Folder: 
 - User Controller
 - Club Controller
+    GET ALL, GET BY P
 - Posts Controller
 - Favorites Controller
 
@@ -32,7 +33,10 @@ Models:
 - User Model
 - Club Model
 - Posts Model
+- Member Model
 - Favorites Model
+- Comment Model
+- Friend Model
 - DTOs
     - Login DTO
     - CreateAccount DTO
