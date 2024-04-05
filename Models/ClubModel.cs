@@ -13,6 +13,7 @@ namespace manga_diction_backend.Models
         public string? ClubName { get; set; }
         public string? Image { get; set; }
         public string? Description { get; set; }
+        public string? DateCreated { get; set; }
         public bool IsPublic { get; set; }
         // separated by commas in endpoint
         // public List<MemberModel>? Members { get; set; }

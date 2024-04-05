@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PasswordService>();
+builder.Services.AddScoped<ClubService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MangaDiction");
 
@@ -15,7 +16,7 @@ builder.Services.AddDbContext<DataContext>(Options => Options.UseSqlServer(conne
 
 builder.Services.AddCors(options => options.AddPolicy("MangaPolicy",
     builder => {
-        builder.WithOrigins("http://localhost:5037", "http://localhost:3000", "http://localhost:3001")
+        builder.WithOrigins("http://localhost:5037", "http://localhost:3000", "http://localhost:3001", "https://manga-diction.vercel.app")
         .AllowAnyHeader()
         .AllowAnyMethod();
     }
