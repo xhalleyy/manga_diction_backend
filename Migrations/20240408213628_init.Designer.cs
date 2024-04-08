@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using manga_diction_backend.Services.Context;
 
@@ -11,9 +12,11 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240408213628_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,6 +211,8 @@ namespace fullstackbackend.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("ClubId");
+
                     b.ToTable("PostInfo");
 
                     b.HasData(
@@ -289,6 +294,22 @@ namespace fullstackbackend.Migrations
                             Salt = "2cwSsNNBcTbUB9ut3H4KOQLNCsXIgD79BHozo5sYBfi0PUJd4TozcI8UM+xkT3TDIxrP/SwJFzBSqKQbR2RZYA==",
                             Username = "avery"
                         });
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.PostModel", b =>
+                {
+                    b.HasOne("manga_diction_backend.Models.ClubModel", "Club")
+                        .WithMany("Posts")
+                        .HasForeignKey("ClubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Club");
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.ClubModel", b =>
+                {
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

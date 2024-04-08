@@ -98,6 +98,23 @@ namespace manga_diction_backend.Services.Context
                 
             };
             builder.Entity<ClubModel>().HasData(defaultClubs);
+
+            var defaultPosts = new List<PostModel>(){
+                new PostModel(){
+                    ID = 1,
+                    UserId = 1,
+                    ClubId = 1,
+                    Category = "Spoilers",
+                    Tags = "Chapter 223",
+                    Description = "I can't believe that happened! And off-screened too... TT",
+                    Image = null,
+                    Likes = 3,
+                    DateCreated = "2024-04-08",
+                    DateUpdated = null,
+                    IsDeleted = false
+                }
+            };
+            builder.Entity<PostModel>().HasData(defaultPosts);
         }
 
     }

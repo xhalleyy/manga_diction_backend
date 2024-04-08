@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<ClubService>();
+builder.Services.AddScoped<PostService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MangaDiction");
 

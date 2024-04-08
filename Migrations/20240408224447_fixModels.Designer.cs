@@ -12,8 +12,8 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240408210155_init")]
-    partial class init
+    [Migration("20240408224447_fixModels")]
+    partial class fixModels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,6 +182,9 @@ namespace fullstackbackend.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ClubId")
+                        .HasColumnType("int");
+
                     b.Property<string>("DateCreated")
                         .HasColumnType("nvarchar(max)");
 
@@ -209,6 +212,20 @@ namespace fullstackbackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("PostInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Category = "Spoilers",
+                            ClubId = 1,
+                            DateCreated = "2024-04-08",
+                            Description = "I can't believe that happened! And off-screened too... TT",
+                            IsDeleted = false,
+                            Likes = 3,
+                            Tags = "Chapter 223",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.UserModel", b =>
