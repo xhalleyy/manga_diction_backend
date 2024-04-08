@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240405075424_init")]
+    [Migration("20240408210155_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -57,6 +57,30 @@ namespace fullstackbackend.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ClubInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            ClubName = "Jujutsu Lovers<3",
+                            DateCreated = "2024-04-08",
+                            Description = "Gege Akutami hates his readers!",
+                            Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            ClubName = "Villainess Arc",
+                            DateCreated = "2024-04-07",
+                            Description = "strong and evil FLs lol",
+                            Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 1
+                        });
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.CommentModel", b =>
@@ -205,6 +229,9 @@ namespace fullstackbackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProfilePic")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Salt")

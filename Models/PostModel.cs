@@ -17,7 +17,6 @@ namespace manga_diction_backend.Models
         public string? DateCreated { get; set; }
         public string? DateUpdated { get; set; }
         public bool IsDeleted { get; set; }
-        // public  { get; set; }
         
         public PostModel(){}
     }

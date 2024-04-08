@@ -15,6 +15,7 @@ namespace manga_diction_backend.Models
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int Age { get; set; }
+        public string? ProfilePic { get; set; }
         public string? Salt { get; set; }
         public string? Hash { get; set; }
         // public List<FriendModel>? FriendList { get; set; }

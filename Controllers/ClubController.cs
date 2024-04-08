@@ -29,16 +29,37 @@ namespace manga_diction_backend.Controllers
 
         // Get Public Clubs
         [HttpGet]
-        [Route("GetClubsByPrivacy")]
-        public IActionResult GetClubsByPrivacy(){
-            return _data.GetClubsByPrivacy();
+        [Route("GetAllPublicClubs")]
+        public IEnumerable<ClubModel>GetAllPublicClubs(){
+            return _data.GetAllPublicClubs();
         }
 
-        // Get Club for how many members
+        // Get Club by ID
+        [HttpGet]
+        [Route("GetClubById/{id}")]
+        public ClubModel GetClubById(int id){
+            return _data.GetClubById(id);
+        }
 
-        // Get Clubs based on creation date
+        // Get Club by Name
+        [HttpGet]
+        [Route("GetClubsByName/{club}")]
+        public List<ClubModel>GetClubsByName(string club){
+            return _data.GetClubsByName(club);
+        }
 
-        // Get Club based on 
+        // Get Club by Recently Created
+        [HttpGet]
+        [Route("GetRecentPublicClubs")]
+        public List<ClubModel> GetRecentPublicClubs(){
+            return _data.GetRecentPublicClubs().ToList();
+        }
+        
+        [HttpGet]
+        [Route("GetOldestPublicClubs")]
+        public List<ClubModel> GetOldestPublicClubs(){
+            return _data.GetOldestPublicClubs().ToList();
+        }
 
         // Create Club
         [HttpPost]
@@ -54,6 +75,7 @@ namespace manga_diction_backend.Controllers
             return _data.UpdateClub(clubToUpdate);
         }
 
+        // Delete Club
         [HttpDelete]
         [Route("DeleteClub")]
         public bool DeleteClub(ClubModel clubToDelete){

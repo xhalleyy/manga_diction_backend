@@ -21,19 +21,42 @@ namespace manga_diction_backend.Services
             return _context.ClubInfo;
         }
 
-
-        public IActionResult GetClubsByPrivacy()
+        public IEnumerable<ClubModel> GetAllPublicClubs( bool recent = true)
         {
             var allItems = GetAllClubs().ToList();
             var filteredItems = allItems.Where(item => item.IsPublic).ToList();
 
-            if (filteredItems == null || filteredItems.Count == 0)
-            {
-                return NotFound("No public clubs found.");
+            // return filteredItems;
+
+            if (recent){
+                return filteredItems.OrderByDescending(item => item.DateCreated);
+            }else{
+                return filteredItems.OrderBy(item => item.DateCreated);
             }
 
-            return Ok(filteredItems);
         }
+
+        public IEnumerable<ClubModel> GetRecentPublicClubs(){
+            var allItems = GetAllPublicClubs().ToList();
+            return allItems.OrderByDescending(item => item.DateCreated);
+        }
+
+        public IEnumerable<ClubModel> GetOldestPublicClubs(){
+            var allItems = GetAllPublicClubs().ToList();
+            return allItems.OrderBy(item => item.DateCreated);
+        }
+
+        public ClubModel GetClubById(int id){
+            return _context.ClubInfo.SingleOrDefault(club => club.ID == id);
+        }
+
+        public List<ClubModel> GetClubsByName(string clubName){
+            var allItems = GetAllPublicClubs().ToList();
+            var filteredItems = allItems.Where(club => club.ClubName.Contains(clubName)).ToList();
+
+            return filteredItems;
+        }
+
 
         public bool CreateClub(ClubModel newClub)
         {

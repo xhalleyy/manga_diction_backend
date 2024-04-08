@@ -16,7 +16,7 @@ Requirements/ Pages:
 Controllers Folder: 
 - User Controller
 - Club Controller
-    GET ALL, GET BY P
+    GET ALL, GET ALL PUBLIC CLUBS, GET CLUB BY ID
 - Posts Controller
 - Favorites Controller
 

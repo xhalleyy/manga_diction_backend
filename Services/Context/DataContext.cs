@@ -29,8 +29,11 @@ namespace manga_diction_backend.Services.Context
         }
 
 
+        // Seed / Initialize defaulted data in the database when database is created or migrated
+        // private method that takes modelbuilder as its parameter; ModelBuilder is a class for building a model
         private void SeedData(ModelBuilder builder)
         {
+            // intializes a list of UserModel objects, each representing a user with properties
             var defaultUsers = new List<UserModel>()
             {
                 new UserModel()
@@ -65,6 +68,36 @@ namespace manga_diction_backend.Services.Context
                 },
             };
             builder.Entity<UserModel>().HasData(defaultUsers);
+            // Configures intial data from defaultUsers by using Entity, which specifies the table we want to configure initial data
+            // Has Data tells Entity Framework to include the provided data
+
+            var defaultClubs = new List<ClubModel>()
+            {
+                new ClubModel()
+                {
+                    ID = 1,
+                    LeaderId = 1,
+                    ClubName = "Jujutsu Lovers<3",
+                    Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
+                    Description = "Gege Akutami hates his readers!",
+                    DateCreated = "2024-04-08",
+                    IsPublic = true,
+                    IsDeleted = false
+                },
+                new ClubModel()
+                {
+                    ID = 2,
+                    LeaderId = 1,
+                    ClubName = "Villainess Arc",
+                    Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
+                    Description = "strong and evil FLs lol",
+                    DateCreated = "2024-04-07",
+                    IsPublic = true,
+                    IsDeleted = false
+                },
+                
+            };
+            builder.Entity<ClubModel>().HasData(defaultClubs);
         }
 
     }
