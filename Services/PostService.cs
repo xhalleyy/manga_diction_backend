@@ -27,6 +27,32 @@ namespace manga_diction_backend.Services
             return allItems.Where(post => post.Category == category);
         }
 
+        public List<PostModel> GetPostsByTags(int clubId, string tag){
+            var allItems = GetAllPostsInClub(clubId).ToList();
+            var filteredItems = allItems.Where(post => post.Tags.Split(",").Contains(tag)).ToList();
+            return filteredItems;
+        }
+
+        public List<PostModel> GetPostsByRecentlyUpdated(int clubId){
+            var allItems = GetAllPostsInClub(clubId).ToList();
+            return allItems.OrderByDescending(post => post.DateUpdated).ToList();
+        }
+
+        public List<PostModel> GetPostsByLeastRecentUpdates(int clubId){
+            var allItems = GetAllPostsInClub(clubId).ToList();
+            return allItems.OrderBy(post => post.DateUpdated).ToList();
+        }
+
+        public List<PostModel> GetRecentlyCreatedPosts(int clubId){
+            var allItems = GetAllPostsInClub(clubId).ToList();
+            return allItems.OrderByDescending(post => post.DateCreated).ToList();
+        }
+
+        public List<PostModel> GetOldestCreatedPosts(int clubId){
+            var allItems = GetAllPostsInClub(clubId).ToList();
+            return allItems.OrderBy(post => post.DateCreated).ToList();
+        }
+
         // Create New Post 
         public bool CreateNewPostInClub(int clubId, PostModel newPost)
         {

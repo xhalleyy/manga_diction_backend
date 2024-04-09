@@ -60,7 +60,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 1,
                             ClubName = "Jujutsu Lovers<3",
-                            DateCreated = "2024-04-08",
+                            DateCreated = "2024-04-05",
                             Description = "Gege Akutami hates his readers!",
                             Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
                             IsDeleted = false,
@@ -71,7 +71,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 2,
                             ClubName = "Villainess Arc",
-                            DateCreated = "2024-04-07",
+                            DateCreated = "2024-04-06",
                             Description = "strong and evil FLs lol",
                             Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
                             IsDeleted = false,
@@ -216,12 +216,36 @@ namespace fullstackbackend.Migrations
                             ID = 1,
                             Category = "Spoilers",
                             ClubId = 1,
-                            DateCreated = "2024-04-08",
+                            DateCreated = "2024-04-05",
+                            DateUpdated = "2024-04-06",
                             Description = "I can't believe that happened! And off-screened too... TT",
                             IsDeleted = false,
                             Likes = 3,
-                            Tags = "Chapter 223",
+                            Tags = "Chapter 223,",
                             UserId = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Category = "Discussion",
+                            ClubId = 1,
+                            DateCreated = "2024-04-06",
+                            DateUpdated = "2024-04-07",
+                            Description = "Who is your guys' favorite character that is currently ALIVE!?",
+                            IsDeleted = false,
+                            Likes = 10,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Category = "Discussion",
+                            ClubId = 1,
+                            DateCreated = "2024-04-08",
+                            Description = "Why is Gege Akutami killing off EVERYBODY?????",
+                            IsDeleted = true,
+                            Likes = 3,
+                            UserId = 2
                         });
                 });
 

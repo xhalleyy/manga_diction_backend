@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace manga_diction_backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class PostController : ControllerBase
     {
         private readonly PostService _data;
@@ -30,6 +30,39 @@ namespace manga_diction_backend.Controllers
         [Route("GetPostsByCategory/{clubId}/{category}")]
         public IEnumerable<PostModel> GetPostsByCategory(int clubId, string category){
             return _data.GetPostsByCategory(clubId, category);
+        }
+
+        // Get Posts by Category
+        [HttpGet]
+        [Route("GetPostsByTags/{clubId}/{tag}")]
+        public List<PostModel> GetPostsByTags(int clubId, string tag){
+            return _data.GetPostsByTags(clubId, tag);
+        }
+
+        // Get Posts By Updated Dates
+        [HttpGet]
+        [Route("GetPostsByRecentlyUpdated/{clubId}")]
+        public List<PostModel> GetPostsByRecentlyUpdated(int clubId){
+            return _data.GetPostsByRecentlyUpdated(clubId);
+        }
+
+        [HttpGet]
+        [Route("GetPostsByLeastRecentUpdates/{clubId}")]
+        public List<PostModel> GetPostsByLeastRecentUpdates(int clubId){
+            return _data.GetPostsByLeastRecentUpdates(clubId);
+        }
+
+        // Get Posts by Created Dates
+        [HttpGet]
+        [Route("GetRecentlyCreatedPosts/{clubId}")]
+        public List<PostModel> GetRecentlyCreatedPosts(int clubId){
+            return _data.GetRecentlyCreatedPosts(clubId);
+        }
+
+        [HttpGet]
+        [Route("GetOldestCreatedPosts/{clubId}")]
+        public List<PostModel> GetOldestCreatedPosts(int clubId){
+            return _data.GetOldestCreatedPosts(clubId);
         }
 
         // Create Post
