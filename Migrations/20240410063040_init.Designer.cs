@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240409070629_init")]
+    [Migration("20240410063040_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -54,6 +54,9 @@ namespace fullstackbackend.Migrations
                     b.Property<int?>("LeaderId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("isMature")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.ToTable("ClubInfo");
@@ -68,7 +71,8 @@ namespace fullstackbackend.Migrations
                             Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
                             IsDeleted = false,
                             IsPublic = true,
-                            LeaderId = 1
+                            LeaderId = 1,
+                            isMature = false
                         },
                         new
                         {
@@ -79,7 +83,8 @@ namespace fullstackbackend.Migrations
                             Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
                             IsDeleted = false,
                             IsPublic = true,
-                            LeaderId = 1
+                            LeaderId = 1,
+                            isMature = false
                         });
                 });
 
@@ -206,6 +211,9 @@ namespace fullstackbackend.Migrations
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -224,7 +232,8 @@ namespace fullstackbackend.Migrations
                             Description = "I can't believe that happened! And off-screened too... TT",
                             IsDeleted = false,
                             Likes = 3,
-                            Tags = "Chapter 223,",
+                            Tags = "CH.223,",
+                            Title = "What happed to Gojo can't be real, right!?",
                             UserId = 1
                         },
                         new
@@ -234,9 +243,9 @@ namespace fullstackbackend.Migrations
                             ClubId = 1,
                             DateCreated = "2024-04-06",
                             DateUpdated = "2024-04-07",
-                            Description = "Who is your guys' favorite character that is currently ALIVE!?",
                             IsDeleted = false,
                             Likes = 10,
+                            Title = "Who is your guys' favorite character that is currently ALIVE!?",
                             UserId = 1
                         },
                         new
@@ -248,6 +257,7 @@ namespace fullstackbackend.Migrations
                             Description = "Why is Gege Akutami killing off EVERYBODY?????",
                             IsDeleted = true,
                             Likes = 3,
+                            Title = "I got some words to say to Gege...",
                             UserId = 2
                         });
                 });

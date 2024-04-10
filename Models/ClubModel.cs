@@ -14,8 +14,9 @@ namespace manga_diction_backend.Models
         public string? Image { get; set; }
         public string? Description { get; set; }
         public string? DateCreated { get; set; }
+        public bool isMature { get; set; } = false;
         public bool IsPublic { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
 
         // public ICollection<PostModel>? Posts { get; set; } // Navigation property to PostModel
 

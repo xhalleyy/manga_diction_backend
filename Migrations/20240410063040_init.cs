@@ -23,6 +23,7 @@ namespace fullstackbackend.Migrations
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isMature = table.Column<bool>(type: "bit", nullable: false),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -99,6 +100,7 @@ namespace fullstackbackend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ClubId = table.Column<int>(type: "int", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -134,21 +136,21 @@ namespace fullstackbackend.Migrations
 
             migrationBuilder.InsertData(
                 table: "ClubInfo",
-                columns: new[] { "ID", "ClubName", "DateCreated", "Description", "Image", "IsDeleted", "IsPublic", "LeaderId" },
+                columns: new[] { "ID", "ClubName", "DateCreated", "Description", "Image", "IsDeleted", "IsPublic", "LeaderId", "isMature" },
                 values: new object[,]
                 {
-                    { 1, "Jujutsu Lovers<3", "2024-04-05", "Gege Akutami hates his readers!", "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80", false, true, 1 },
-                    { 2, "Villainess Arc", "2024-04-06", "strong and evil FLs lol", "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png", false, true, 1 }
+                    { 1, "Jujutsu Lovers<3", "2024-04-05", "Gege Akutami hates his readers!", "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80", false, true, 1, false },
+                    { 2, "Villainess Arc", "2024-04-06", "strong and evil FLs lol", "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png", false, true, 1, false }
                 });
 
             migrationBuilder.InsertData(
                 table: "PostInfo",
-                columns: new[] { "ID", "Category", "ClubId", "DateCreated", "DateUpdated", "Description", "Image", "IsDeleted", "Likes", "Tags", "UserId" },
+                columns: new[] { "ID", "Category", "ClubId", "DateCreated", "DateUpdated", "Description", "Image", "IsDeleted", "Likes", "Tags", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Spoilers", 1, "2024-04-05", "2024-04-06", "I can't believe that happened! And off-screened too... TT", null, false, 3, "Chapter 223,", 1 },
-                    { 2, "Discussion", 1, "2024-04-06", "2024-04-07", "Who is your guys' favorite character that is currently ALIVE!?", null, false, 10, null, 1 },
-                    { 3, "Discussion", 1, "2024-04-08", null, "Why is Gege Akutami killing off EVERYBODY?????", null, true, 3, null, 2 }
+                    { 1, "Spoilers", 1, "2024-04-05", "2024-04-06", "I can't believe that happened! And off-screened too... TT", null, false, 3, "CH.223,", "What happed to Gojo can't be real, right!?", 1 },
+                    { 2, "Discussion", 1, "2024-04-06", "2024-04-07", null, null, false, 10, null, "Who is your guys' favorite character that is currently ALIVE!?", 1 },
+                    { 3, "Discussion", 1, "2024-04-08", null, "Why is Gege Akutami killing off EVERYBODY?????", null, true, 3, null, "I got some words to say to Gege...", 2 }
                 });
 
             migrationBuilder.InsertData(
