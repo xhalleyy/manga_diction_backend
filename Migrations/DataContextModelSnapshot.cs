@@ -82,6 +82,54 @@ namespace fullstackbackend.Migrations
                             IsPublic = true,
                             LeaderId = 1,
                             isMature = false
+                        },
+                        new
+                        {
+                            ID = 3,
+                            ClubName = "Psychological Manhwas",
+                            DateCreated = "2024-04-010",
+                            Description = "scared but i cant stop reading...",
+                            Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 3,
+                            isMature = true
+                        },
+                        new
+                        {
+                            ID = 4,
+                            ClubName = "Best Webtoons",
+                            DateCreated = "2024-04-011",
+                            Description = "Talk about Webtoons!",
+                            Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 3,
+                            isMature = false
+                        },
+                        new
+                        {
+                            ID = 5,
+                            ClubName = "Solo Leveling!",
+                            DateCreated = "2024-04-011",
+                            Description = "Rave about Solo Leveling!!!",
+                            Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 3,
+                            isMature = false
+                        },
+                        new
+                        {
+                            ID = 6,
+                            ClubName = "Shoujo 4ever ",
+                            DateCreated = "2024-04-09",
+                            Description = "Shoujo debatably has the best mangas!",
+                            Image = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg",
+                            IsDeleted = false,
+                            IsPublic = true,
+                            LeaderId = 2,
+                            isMature = false
                         });
                 });
 

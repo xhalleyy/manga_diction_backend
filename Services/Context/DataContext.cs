@@ -100,6 +100,50 @@ namespace manga_diction_backend.Services.Context
                     IsPublic = true,
                     IsDeleted = false
                 },
+                new ClubModel(){
+                    ID = 3,
+                    LeaderId = 3,
+                    ClubName = "Psychological Manhwas",
+                    Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
+                    Description = "scared but i cant stop reading...",
+                    DateCreated = "2024-04-010",
+                    isMature = true,
+                    IsPublic = true,
+                    IsDeleted = false
+                },
+                new ClubModel(){
+                    ID = 4,
+                    LeaderId = 3,
+                    ClubName = "Best Webtoons",
+                    Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
+                    Description = "Talk about Webtoons!",
+                    DateCreated = "2024-04-011",
+                    isMature = false,
+                    IsPublic = true,
+                    IsDeleted = false
+                },
+                new ClubModel(){
+                    ID = 5,
+                    LeaderId = 3,
+                    ClubName = "Solo Leveling!",
+                    Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
+                    Description = "Rave about Solo Leveling!!!",
+                    DateCreated = "2024-04-011",
+                    isMature = false,
+                    IsPublic = true,
+                    IsDeleted = false
+                },
+                new ClubModel(){
+                    ID = 6,
+                    LeaderId = 2,
+                    ClubName = "Shoujo 4ever ",
+                    Image = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg",
+                    Description = "Shoujo debatably has the best mangas!",
+                    DateCreated = "2024-04-09",
+                    isMature = false,
+                    IsPublic = true,
+                    IsDeleted = false
+                }
                 
             };
             builder.Entity<ClubModel>().HasData(defaultClubs);
