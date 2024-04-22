@@ -26,6 +26,13 @@ namespace manga_diction_backend.Controllers
             return _data.Login(User);
         }
 
+        // Get User Endpoint
+        [HttpGet]
+        [Route("GetUser/{id}")]
+        public UserModel GetUser(int id){
+            return _data.GetUser(id);
+        }
+
         // Create User Endpoint
         [HttpPost]
         [Route("CreateUser")]

@@ -107,8 +107,10 @@ namespace manga_diction_backend.Services
                     // Generate JWT token as a string
                     var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
 
+                    // Include user ID in the response
+                    var userId = foundUser.ID;
                    
-                    Result = Ok(new { Token = tokenString });
+                    Result = Ok(new { Token = tokenString, UserId = userId });
                 }
             }
 
@@ -117,6 +119,10 @@ namespace manga_diction_backend.Services
 
         public UserModel GetUserByUsername(string username){
             return _context.UserInfo.SingleOrDefault(user => user.Username == username);
+        }
+
+        public UserModel GetUser(int id){
+            return _context.UserInfo.SingleOrDefault(user => user.ID == id);
         }
 
         public bool UpdateUser(UserModel userToUpdate){
