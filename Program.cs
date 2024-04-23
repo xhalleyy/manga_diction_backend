@@ -10,6 +10,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<PasswordService>();
 builder.Services.AddScoped<ClubService>();
 builder.Services.AddScoped<PostService>();
+builder.Services.AddScoped<MemberService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MangaDiction");
 

@@ -22,6 +22,10 @@ namespace manga_diction_backend.Services
             return _context.PostInfo.Where(post => post.ClubId == clubId && !post.IsDeleted).ToList();
         }
 
+        public PostModel GetPostById(int id){
+            return _context.PostInfo.SingleOrDefault(post => post.ID == id);
+        }
+
         public IEnumerable<PostModel> GetPostsByCategory(int clubId, string category){
             var allItems = GetAllPostsInClub(clubId).ToList();
             return allItems.Where(post => post.Category == category);

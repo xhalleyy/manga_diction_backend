@@ -18,7 +18,7 @@ namespace manga_diction_backend.Controllers
             _data = data;
         }
 
-        // Get Posts by Clubs
+        // Get Posts by Club Id
         [HttpGet]
         [Route("GetAllPostsInClub/{clubId}")]
         public IEnumerable<PostModel>GetAllPostsInClub(int clubId){
@@ -32,11 +32,17 @@ namespace manga_diction_backend.Controllers
             return _data.GetPostsByCategory(clubId, category);
         }
 
-        // Get Posts by Category
+        // Get Posts by Tag
         [HttpGet]
         [Route("GetPostsByTags/{clubId}/{tag}")]
         public List<PostModel> GetPostsByTags(int clubId, string tag){
             return _data.GetPostsByTags(clubId, tag);
+        }
+
+        [HttpGet]
+        [Route("GetPostById/{id}")]
+        public PostModel GetPostById(int id){
+            return _data.GetPostById(id);
         }
 
         // Get Posts By Updated Dates
