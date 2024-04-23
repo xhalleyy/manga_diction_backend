@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace manga_diction_backend.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class MemberController : ControllerBase
     {
         private readonly MemberService _data;
