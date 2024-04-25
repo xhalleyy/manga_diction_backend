@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240423060926_init")]
+    [Migration("20240424032959_init")]
     partial class init
     {
         /// <inheritdoc />

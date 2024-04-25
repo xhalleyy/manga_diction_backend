@@ -106,7 +106,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Psychological Manhwas",
                     Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
                     Description = "scared but i cant stop reading...",
-                    DateCreated = "2024-04-010",
+                    DateCreated = "2024-04-10",
                     isMature = true,
                     IsPublic = true,
                     IsDeleted = false
@@ -117,7 +117,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Best Webtoons",
                     Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
                     Description = "Talk about Webtoons!",
-                    DateCreated = "2024-04-011",
+                    DateCreated = "2024-04-11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
@@ -128,7 +128,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Solo Leveling!",
                     Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
                     Description = "Rave about Solo Leveling!!!",
-                    DateCreated = "2024-04-011",
+                    DateCreated = "2024-04-11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
