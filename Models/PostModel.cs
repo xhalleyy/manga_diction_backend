@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,13 +16,13 @@ namespace manga_diction_backend.Models
         public string? Tags { get; set; }
         public string? Description { get; set; }
         public string? Image { get; set; }
-        public int Likes { get; set; }
+        // public int Likes { get; set; }
         public string? DateCreated { get; set; }
         public string? DateUpdated { get; set; }
         public bool IsDeleted { get; set; } = false;
 
         // public ClubModel? Club { get; set; } // Navigation property to ClubModel
-        
+        // public List<LikesModel> Likes { get; set; }
         public PostModel(){}
     }
 }

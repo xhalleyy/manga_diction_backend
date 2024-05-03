@@ -13,6 +13,7 @@ namespace manga_diction_backend.Services.Context
         public DbSet<UserModel> UserInfo { get; set; }
         public DbSet<ClubModel> ClubInfo { get; set; }
         public DbSet<PostModel> PostInfo { get; set; }
+        public DbSet<LikesModel> LikesInfo { get; set;}
         public DbSet<FavoritedModel> FavoritesInfo { get; set; }
         public DbSet<CommentModel> CommentInfo { get; set; }
         public DbSet<FriendModel> FriendInfo { get; set; }
@@ -158,7 +159,7 @@ namespace manga_diction_backend.Services.Context
                     Title ="What happed to Gojo can't be real, right!?",
                     Description = "I can't believe that happened! And off-screened too... TT",
                     Image = null,
-                    Likes = 3,
+                    // Likes = 3,
                     DateCreated = "2024-04-05",
                     DateUpdated = "2024-04-06",
                     IsDeleted = false
@@ -172,7 +173,7 @@ namespace manga_diction_backend.Services.Context
                     Title="Who is your guys' favorite character that is currently ALIVE!?",
                     Description = null,
                     Image = null,
-                    Likes = 10,
+                    // Likes = 10,
                     DateCreated = "2024-04-06",
                     DateUpdated = "2024-04-07",
                     IsDeleted = false
@@ -186,7 +187,7 @@ namespace manga_diction_backend.Services.Context
                     Title = "I got some words to say to Gege...",
                     Description = "Why is Gege Akutami killing off EVERYBODY?????",
                     Image = null,
-                    Likes = 3,
+                    // Likes = 3,
                     DateCreated = "2024-04-08",
                     DateUpdated = null,
                     IsDeleted = true

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using manga_diction_backend.Models;
@@ -18,6 +19,7 @@ namespace manga_diction_backend.Models
         public string? ProfilePic { get; set; }
         public string? Salt { get; set; }
         public string? Hash { get; set; }
+        // public List<LikesModel> Likes { get; set; }
         // public List<FriendModel>? FriendList { get; set; }
         // public List<FavoritedModel>? FavoritedMangas { get; set; }
         // public List<ClubModel>? Clubs { get; set; }

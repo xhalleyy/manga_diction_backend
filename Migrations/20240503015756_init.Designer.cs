@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240424032959_init")]
+    [Migration("20240503015756_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 3,
                             ClubName = "Psychological Manhwas",
-                            DateCreated = "2024-04-010",
+                            DateCreated = "2024-04-10",
                             Description = "scared but i cant stop reading...",
                             Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
                             IsDeleted = false,
@@ -102,7 +102,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 4,
                             ClubName = "Best Webtoons",
-                            DateCreated = "2024-04-011",
+                            DateCreated = "2024-04-11",
                             Description = "Talk about Webtoons!",
                             Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
                             IsDeleted = false,
@@ -114,7 +114,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 5,
                             ClubName = "Solo Leveling!",
-                            DateCreated = "2024-04-011",
+                            DateCreated = "2024-04-11",
                             Description = "Rave about Solo Leveling!!!",
                             Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
                             IsDeleted = false,
@@ -205,6 +205,30 @@ namespace fullstackbackend.Migrations
                     b.ToTable("FriendInfo");
                 });
 
+            modelBuilder.Entity("manga_diction_backend.Models.LikesModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LikedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LikesInfo");
+                });
+
             modelBuilder.Entity("manga_diction_backend.Models.MemberModel", b =>
                 {
                     b.Property<int>("Id")
@@ -253,9 +277,6 @@ namespace fullstackbackend.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<string>("Tags")
                         .HasColumnType("nvarchar(max)");
 
@@ -279,7 +300,6 @@ namespace fullstackbackend.Migrations
                             DateUpdated = "2024-04-06",
                             Description = "I can't believe that happened! And off-screened too... TT",
                             IsDeleted = false,
-                            Likes = 3,
                             Tags = "CH.223,",
                             Title = "What happed to Gojo can't be real, right!?",
                             UserId = 1
@@ -292,7 +312,6 @@ namespace fullstackbackend.Migrations
                             DateCreated = "2024-04-06",
                             DateUpdated = "2024-04-07",
                             IsDeleted = false,
-                            Likes = 10,
                             Title = "Who is your guys' favorite character that is currently ALIVE!?",
                             UserId = 1
                         },
@@ -304,7 +323,6 @@ namespace fullstackbackend.Migrations
                             DateCreated = "2024-04-08",
                             Description = "Why is Gege Akutami killing off EVERYBODY?????",
                             IsDeleted = true,
-                            Likes = 3,
                             Title = "I got some words to say to Gege...",
                             UserId = 2
                         });
@@ -374,6 +392,17 @@ namespace fullstackbackend.Migrations
                             Salt = "2cwSsNNBcTbUB9ut3H4KOQLNCsXIgD79BHozo5sYBfi0PUJd4TozcI8UM+xkT3TDIxrP/SwJFzBSqKQbR2RZYA==",
                             Username = "avery"
                         });
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.LikesModel", b =>
+                {
+                    b.HasOne("manga_diction_backend.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
