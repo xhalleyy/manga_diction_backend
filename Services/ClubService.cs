@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using manga_diction_backend.Models;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace manga_diction_backend.Services
 {
@@ -21,36 +22,50 @@ namespace manga_diction_backend.Services
             return _context.ClubInfo;
         }
 
-        public IEnumerable<ClubModel> GetAllPublicClubs( bool recent = true)
+        public async Task<List<ClubModel>> GetClubsByLeaderAsync(int leaderId)
+        {
+            return await _context.ClubInfo
+                .Where(c => c.LeaderId == leaderId)
+                .ToListAsync();
+        }
+        
+        public IEnumerable<ClubModel> GetAllPublicClubs(bool recent = true)
         {
             var allItems = GetAllClubs().ToList();
             var filteredItems = allItems.Where(item => item.IsPublic).ToList();
 
             // return filteredItems;
 
-            if (recent){
+            if (recent)
+            {
                 return filteredItems.OrderByDescending(item => item.DateCreated);
-            }else{
+            }
+            else
+            {
                 return filteredItems.OrderBy(item => item.DateCreated);
             }
 
         }
 
-        public IEnumerable<ClubModel> GetRecentPublicClubs(){
+        public IEnumerable<ClubModel> GetRecentPublicClubs()
+        {
             var allItems = GetAllPublicClubs().ToList();
             return allItems.OrderByDescending(item => item.DateCreated);
         }
 
-        public IEnumerable<ClubModel> GetOldestPublicClubs(){
+        public IEnumerable<ClubModel> GetOldestPublicClubs()
+        {
             var allItems = GetAllPublicClubs().ToList();
             return allItems.OrderBy(item => item.DateCreated);
         }
 
-        public ClubModel GetClubById(int id){
+        public ClubModel GetClubById(int id)
+        {
             return _context.ClubInfo.SingleOrDefault(club => club.ID == id);
         }
 
-        public List<ClubModel> GetClubsByName(string clubName){
+        public List<ClubModel> GetClubsByName(string clubName)
+        {
             var allItems = GetAllPublicClubs().ToList();
             var filteredItems = allItems.Where(club => club.ClubName.Contains(clubName)).ToList();
 

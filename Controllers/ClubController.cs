@@ -27,6 +27,14 @@ namespace manga_diction_backend.Controllers
             return _data.GetAllClubs();
         }
 
+        // Get Clubs From LeaderId
+        [HttpGet]
+        [Route("GetClubsByLeader/{leaderId}")]
+        public async Task<ActionResult<List<ClubModel>>> GetClubsByLeader(int leaderId){
+            var clubs = await _data.GetClubsByLeaderAsync(leaderId);
+            return clubs;
+        }
+
         // Get Public Clubs
         [HttpGet]
         [Route("GetAllPublicClubs")]
