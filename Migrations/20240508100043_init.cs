@@ -34,23 +34,6 @@ namespace fullstackbackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CommentInfo",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Reply = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Likes = table.Column<int>(type: "int", nullable: false),
-                    PostId = table.Column<int>(type: "int", nullable: true),
-                    CommentId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CommentInfo", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "FavoritesInfo",
                 columns: table => new
                 {
@@ -135,6 +118,29 @@ namespace fullstackbackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CommentInfo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Reply = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PostedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: true),
+                    ParentCommentId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentInfo", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_CommentInfo_UserInfo_UserId",
+                        column: x => x.UserId,
+                        principalTable: "UserInfo",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LikesInfo",
                 columns: table => new
                 {
@@ -187,6 +193,11 @@ namespace fullstackbackend.Migrations
                     { 2, 26, "sinatha", "5W7eYQVwy46nN1Kbw1xD6Joia04j9fKQ34xmp/HXMl9ecr7LZKLdnbabRbhKjmivAGKS3MFgY+63+z3jwyCvmrpzGFLW2r/e2EAlA3KJQyiCksMQOqGHTqEyRmLTbERhR4OctvM3ayoIgrCPssbZY39Ul0sJ3/9L8YxWoQL8IWGGjk4elh0L44fLy66O6yAN5FTZ7yXVUYK78Zj1dDAc8t/UPL3WZQFGBQvKXjWg+bNUlDAOQ9cvSL7DaIE9iLUQyobabQXNvGR610ECuq6PhQB2exC+dgKp9NPYuDLBrZvQNAunjBARm0Uce4w60xiam3HVeZqsEhZBhkqgxEEMDQ==", "chin", null, "NxLWGIL6vGU220txp/GXGs144iMqXkQkRSuNX/ORZHGC/cxVcMEDNOuK+7w/3lxP6mAUFFXCD+cVdypK2TmY4g==", "sinatha" },
                     { 3, 22, "avery", "xBp/Z30KHEtPWYcgo7MrufRCSvgrtKBZ5xQqSTIn5ghTG5o+vj2bnrwalRpI3SbLIgT1XlGzRPOtjx4Aka7E8NPPtreqDLrcz0dc4OS4e4BGZ1SDhByokm0I3SOUJX3KKwbW3m4zGgkD6ctUGLqcrrmHnDsm3WN+tmGaW5xnFadlr+InxME4BdgVmB8jreLyMx60sFUXvNdmGKPC/jHA270YusRCGH2CljHKsL2moZWI/xDABUm7WaBKorrO2B22hkcH3tHNJcdkKjhHG5OzFTSj074wT7EaB5Spprqq2Cu7hRfZSfNe8Igc0ySAMojxk0jRYm+3nADHz2/GsFlwJQ==", "hillstrom", null, "2cwSsNNBcTbUB9ut3H4KOQLNCsXIgD79BHozo5sYBfi0PUJd4TozcI8UM+xkT3TDIxrP/SwJFzBSqKQbR2RZYA==", "avery" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CommentInfo_UserId",
+                table: "CommentInfo",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LikesInfo_UserId",

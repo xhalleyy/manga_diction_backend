@@ -41,10 +41,13 @@ namespace manga_diction_backend.Services
         }
 
         // ADD CLUB TO USER 
+        // input/output operations (i.e. reading/writing data to a database, executing queries, retrieving records, updating database tables)
+        // async because this function interacts with a database and is making changes; allow the calling thread to be released while waiting for the operation to complete
         public async Task<IActionResult> AddClubToUser(int userId, int clubId)
         {
             try
             {
+                // first or default returns first element, but allows other operations to continue while the database query is being processed. 
                 var existingClub = await _context.MemberInfo.FirstOrDefaultAsync(club => club.UserId == userId && club.ClubId == clubId);
 
                 if(existingClub != null){
@@ -95,9 +98,11 @@ namespace manga_diction_backend.Services
             }
         }
 
+        // This function removes a specific user from a specific club 
         public async Task<IActionResult> RemoveMemberFromClub(int userId, int clubId){
             try 
             {
+                // uses first or default async to find the first match of user id and club id in the table
                 var userClub = await _context.MemberInfo.FirstOrDefaultAsync(club => club.UserId == userId && club.ClubId == clubId);
 
                 if(userClub == null)
@@ -115,16 +120,20 @@ namespace manga_diction_backend.Services
             }
         }
 
+        // This function remove the club with a specific user.
         public async Task<IActionResult> RemoveClubFromUser(int userId, int clubId){
             try
             {
+                // Uses Where instead to fetch ALL matching records in the MemberInfo table; just in case there are somehow instances of duplicates
                 var userClubs = await _context.MemberInfo.Where(club => club.UserId == userId && club.ClubId == clubId).ToListAsync();
 
+                // if any clubs are found, it removes all of them with remove range
                 if (userClubs == null || !userClubs.Any())
                 {
                     return NotFound("User is not associated with the club.");
                 }
 
+                // RemoveRange is used to remove a range of entities from a db. 
                  _context.MemberInfo.RemoveRange(userClubs);
                 await _context.SaveChangesAsync();
 

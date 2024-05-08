@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240506163954_init")]
+    [Migration("20240508100043_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -144,14 +144,14 @@ namespace fullstackbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Likes")
+                    b.Property<int?>("ParentCommentId")
                         .HasColumnType("int");
 
                     b.Property<int?>("PostId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("PostedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Reply")
                         .HasColumnType("nvarchar(max)");
@@ -160,6 +160,8 @@ namespace fullstackbackend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CommentInfo");
                 });
@@ -392,6 +394,17 @@ namespace fullstackbackend.Migrations
                             Salt = "2cwSsNNBcTbUB9ut3H4KOQLNCsXIgD79BHozo5sYBfi0PUJd4TozcI8UM+xkT3TDIxrP/SwJFzBSqKQbR2RZYA==",
                             Username = "avery"
                         });
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.CommentModel", b =>
+                {
+                    b.HasOne("manga_diction_backend.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.LikesModel", b =>

@@ -18,8 +18,6 @@ namespace manga_diction_backend.Models
         public bool IsPublic { get; set; }
         public bool IsDeleted { get; set; } = false;
 
-        // public ICollection<PostModel>? Posts { get; set; } // Navigation property to PostModel
-
         public ClubModel(){}
     }
 }
