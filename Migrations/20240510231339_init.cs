@@ -55,7 +55,8 @@ namespace fullstackbackend.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    FriendId = table.Column<int>(type: "int", nullable: false)
+                    FriendId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +70,29 @@ namespace fullstackbackend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ClubId = table.Column<int>(type: "int", nullable: false)
+                    ClubId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MemberInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NotificationInfo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: true),
+                    ClubId = table.Column<int>(type: "int", nullable: true),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationInfo", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,6 +244,9 @@ namespace fullstackbackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "MemberInfo");
+
+            migrationBuilder.DropTable(
+                name: "NotificationInfo");
 
             migrationBuilder.DropTable(
                 name: "PostInfo");

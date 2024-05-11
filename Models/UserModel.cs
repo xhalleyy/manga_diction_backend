@@ -16,6 +16,7 @@ namespace manga_diction_backend.Models
         public string? Username { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        [JsonIgnore]
         public int Age { get; set; }
         public string? ProfilePic { get; set; }
         // To not display Salt and Hash when I retrieve the likes

@@ -18,6 +18,7 @@ namespace manga_diction_backend.Services.Context
         public DbSet<CommentModel> CommentInfo { get; set; }
         public DbSet<FriendModel> FriendInfo { get; set; }
         public DbSet<MemberModel> MemberInfo { get; set; }
+        public DbSet<NotificationModel> NotificationInfo { get; set; }
 
         // DbContextOptions options in the constructor allows you to configure the context when it's created, such as specifying the database provider, connection string, etc.
         public DataContext(DbContextOptions options) : base(options) { }

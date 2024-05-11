@@ -66,7 +66,7 @@ namespace manga_diction_backend.Services
 
         public List<ClubModel> GetClubsByName(string clubName)
         {
-            var allItems = GetAllPublicClubs().ToList();
+            var allItems = GetAllClubs().ToList();
             var filteredItems = allItems.Where(club => club.ClubName.Contains(clubName)).ToList();
 
             return filteredItems;

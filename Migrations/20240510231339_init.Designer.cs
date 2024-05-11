@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240508100043_init")]
+    [Migration("20240510231339_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -199,6 +199,9 @@ namespace fullstackbackend.Migrations
                     b.Property<int>("FriendId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -242,12 +245,43 @@ namespace fullstackbackend.Migrations
                     b.Property<int>("ClubId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("MemberInfo");
+                });
+
+            modelBuilder.Entity("manga_diction_backend.Models.NotificationModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int?>("ClubId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("NotificationInfo");
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.PostModel", b =>
