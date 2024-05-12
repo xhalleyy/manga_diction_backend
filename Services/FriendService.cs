@@ -47,7 +47,7 @@ namespace manga_diction_backend.Services
         public IActionResult GetPendingFriends(int userId)
         {
             var pendingRequests = _context.FriendInfo
-                .Where(friend => friend.UserId == userId && friend.Status == RequestStatus.Pending)
+                .Where(friend => friend.FriendId == userId && friend.Status == RequestStatus.Pending)
                 .ToList();
 
             return Ok(pendingRequests);

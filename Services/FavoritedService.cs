@@ -29,7 +29,7 @@ namespace manga_diction_backend.Services
             _context.FavoritedInfo.Add(newFavorite);
             await _context.SaveChangesAsync();
 
-            return Ok(newFavorite);
+            return Ok("Manga successfully added to favorites");
         }
 
         public ActionResult<IEnumerable<FavoritedModel>> GetInProgressFavorites(int userId)

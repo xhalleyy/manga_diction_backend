@@ -234,3 +234,8 @@ C:\Users\Halley\Documents\CodeStack\manga_diction_backend\bin\Debug\net7.0\publi
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\bin\Debug\net7.0\publish\appsettings.json
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.deps.json
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.runtimeconfig.json
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\web.config
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\appsettings.Development.json
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\appsettings.json
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.deps.json
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.runtimeconfig.json
