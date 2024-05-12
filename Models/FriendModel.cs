@@ -6,6 +6,7 @@ using Azure.Core;
 
 namespace manga_diction_backend.Models
 {
+    // enum type is a value type which the associated values of enum members are of type int; starting with zero and increases by one
     public enum RequestStatus {
         Pending,
         Accepted,

@@ -171,18 +171,18 @@ namespace fullstackbackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<bool>("InProgress")
+                    b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MangaId")
-                        .HasColumnType("int");
+                    b.Property<string>("MangaId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.ToTable("FavoritesInfo");
+                    b.ToTable("FavoritedInfo");
                 });
 
             modelBuilder.Entity("manga_diction_backend.Models.FriendModel", b =>

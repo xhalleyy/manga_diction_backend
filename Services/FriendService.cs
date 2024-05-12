@@ -91,11 +91,15 @@ namespace manga_diction_backend.Services
                 .Where(f => (f.UserId == userId || f.FriendId == userId) && f.Status == RequestStatus.Accepted)
                 .ToList();
 
+            // Want to return the list of user Models of the Accepted Friends, so creating a new instance of userModel.
             List<UserModel> acceptedFriendsWithUserModel = new List<UserModel>();
 
+            // for each person on the friends list
             foreach (var friend in acceptedFriends)
             {
+                // grabbing friend's id by ternary
                 int friendUserId = friend.UserId == userId ? friend.FriendId : friend.UserId;
+                // grab the first element/ object of the user model with the friend's id
                 var friendUser = _context.UserInfo.FirstOrDefault(u => u.ID == friendUserId);
 
                 if (friendUser != null)

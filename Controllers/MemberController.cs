@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using manga_diction_backend.Models;
 using manga_diction_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,17 +43,22 @@ namespace manga_diction_backend.Controllers
         public async Task<IActionResult> AddMemberToClub(int userId, int clubId){
             return await _data.AddMemberToClub(userId, clubId);
         }
+
+        // GET PENDING REQUESTS AS LEADER
+        [HttpGet]
+        [Route("GetPendingRequest")]
+        public List<ClubMembers> GETPENDINGREQUESTFORCLUB(int userId)
+        {
+            return _data.GETPENDINGREQUESTFORCLUB(userId);
+        }
+        // UPDATE INVITE REQUEST AS LEADER
+
+
         // DELETE USER IN CLUB MEMBERS
         [HttpDelete]
         [Route("RemoveMemberFromClub")]
         public async Task<IActionResult> RemoveMemberFromClub(int userId, int clubId){
             return await _data.RemoveMemberFromClub(userId, clubId);
-        }
-        // DELETE CLUB IN USER ID
-        [HttpDelete]
-        [Route("RemoveClubFromUser")]
-        public async Task<IActionResult> RemoveClubFromUser(int userId, int clubId){
-            return await _data.RemoveClubFromUser(userId, clubId);
         }
     }
 }

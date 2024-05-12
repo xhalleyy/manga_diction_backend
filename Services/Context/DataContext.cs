@@ -14,7 +14,7 @@ namespace manga_diction_backend.Services.Context
         public DbSet<ClubModel> ClubInfo { get; set; }
         public DbSet<PostModel> PostInfo { get; set; }
         public DbSet<LikesModel> LikesInfo { get; set;}
-        public DbSet<FavoritedModel> FavoritesInfo { get; set; }
+        public DbSet<FavoritedModel> FavoritedInfo { get; set; }
         public DbSet<CommentModel> CommentInfo { get; set; }
         public DbSet<FriendModel> FriendInfo { get; set; }
         public DbSet<MemberModel> MemberInfo { get; set; }

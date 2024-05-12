@@ -9,8 +9,8 @@ namespace manga_diction_backend.Models
     {
         public int ID { get; set; }
         public int UserId { get; set; }
-        public int MangaId { get; set; }
-        public bool InProgress { get; set; }
+        public string? MangaId { get; set; }
+        public bool Completed { get; set; }
         public FavoritedModel()
         {
             

@@ -15,6 +15,7 @@ builder.Services.AddScoped<LikesService>();
 builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<FriendService>();
 builder.Services.AddScoped<NotificationService>();
+builder.Services.AddScoped<FavoritedService>();
 
 var connectionString = builder.Configuration.GetConnectionString("MangaDiction");
 

@@ -34,18 +34,18 @@ namespace fullstackbackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FavoritesInfo",
+                name: "FavoritedInfo",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    MangaId = table.Column<int>(type: "int", nullable: false),
-                    InProgress = table.Column<bool>(type: "bit", nullable: false)
+                    MangaId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Completed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FavoritesInfo", x => x.ID);
+                    table.PrimaryKey("PK_FavoritedInfo", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,7 +234,7 @@ namespace fullstackbackend.Migrations
                 name: "CommentInfo");
 
             migrationBuilder.DropTable(
-                name: "FavoritesInfo");
+                name: "FavoritedInfo");
 
             migrationBuilder.DropTable(
                 name: "FriendInfo");
