@@ -42,10 +42,6 @@ namespace manga_diction_backend.Services
                 newUser.Age = UserToAdd.Age;
                 newUser.Salt = hashPassword.Salt;
                 newUser.Hash = hashPassword.Hash;
-                // newUser.FriendList = new List<FriendModel>();
-                // newUser.FavoritedMangas = new List<FavoritedModel>();
-                // newUser.Clubs = new List<ClubModel>();
-
                 _context.Add(newUser);
 
                 result = _context.SaveChanges() != 0;
@@ -87,11 +83,13 @@ namespace manga_diction_backend.Services
         {
             IActionResult Result = Unauthorized();
 
-            if(DoesUserExist(User.Username)){
+            if (DoesUserExist(User.Username))
+            {
 
                 UserModel foundUser = GetUserByUsername(User.Username);
 
-                if(VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt)){
+                if (VerifyUsersPassword(User.Password, foundUser.Hash, foundUser.Salt))
+                {
                     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
 
                     var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -109,7 +107,7 @@ namespace manga_diction_backend.Services
 
                     // Include user ID in the response
                     var userId = foundUser.ID;
-                   
+
                     Result = Ok(new { Token = tokenString, UserId = userId });
                 }
             }
@@ -117,42 +115,120 @@ namespace manga_diction_backend.Services
             return Result;
         }
 
-        public UserModel GetUserByUsername(string username){
+        public UserModel GetUserByUsername(string username)
+        {
             return _context.UserInfo.SingleOrDefault(user => user.Username == username);
         }
 
-        public UserModel GetUser(int id){
+        public UserModel GetUser(int id)
+        {
             return _context.UserInfo.SingleOrDefault(user => user.ID == id);
         }
 
-        public bool UpdateUser(UserModel userToUpdate){
-            _context.Update<UserModel>(userToUpdate);
-            return _context.SaveChanges() != 0;
-        }
-
-        public bool UpdateUsername(int id, string username){
-            UserModel foundUser = GetUserById(id);
-
-            bool result = false;
-
-            if(foundUser != null){
-                foundUser.Username = username;
-                _context.Update<UserModel>(foundUser);
-                result = _context.SaveChanges() != 0;
+        public IActionResult GetUsersbyUsername(string username)
+        {
+            // NULL OR EMPTY: indicates whether the specified string is null or an empty string ("")
+            if (string.IsNullOrEmpty(username))
+            {
+                return BadRequest("No Users with that Username.");
             }
 
-            return result;
+            var users = _context.UserInfo
+                                // Finding Users that contain the string username; then grabbing their properties and returning it
+                                .Where(user => user.Username.Contains(username))
+                                .Select(user => new UserModel
+                                {
+                                    ID = user.ID,
+                                    Username = user.Username,
+                                    FirstName = user.FirstName,
+                                    LastName = user.LastName,
+                                    // Age = user.Age,
+                                    ProfilePic = user.ProfilePic
+                                })
+                                .ToList();
+
+            return Ok(users);
         }
 
-        public UserModel GetUserById(int id){
+        // public bool UpdateUser(UserModel userToUpdate){
+        //     _context.Update<UserModel>(userToUpdate);
+        //     return _context.SaveChanges() != 0;
+        // }
+
+        public IActionResult UpdateUser([FromBody] UpdateUserDTO model)
+        {
+            if (model == null || model.ID == 0)
+            {
+                return BadRequest("Invalid user update request");
+            }
+
+            var user = _context.UserInfo.Find(model.ID);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            // Handle password change if provided
+            if (!string.IsNullOrEmpty(model.CurrentPassword) && !string.IsNullOrEmpty(model.NewPassword))
+            {
+                // Verify the current password
+                if (!VerifyUsersPassword(model.CurrentPassword, user.Hash, user.Salt))
+                {
+                    return Unauthorized("Current password is incorrect");
+                }
+
+                // Hash the new password
+                var newHashedPassword = HashPassword(model.NewPassword);
+                user.Hash = newHashedPassword.Hash;
+                user.Salt = newHashedPassword.Salt;
+            }
+
+            // Update other user properties
+            if (!string.IsNullOrEmpty(model.Username)) user.Username = model.Username;
+            if (!string.IsNullOrEmpty(model.FirstName)) user.FirstName = model.FirstName;
+            if (!string.IsNullOrEmpty(model.LastName)) user.LastName = model.LastName;
+            if (model.Age.HasValue) user.Age = model.Age.Value;
+            if (!string.IsNullOrEmpty(model.ProfilePic)) user.ProfilePic = model.ProfilePic;
+
+            _context.Update(user);
+            bool result = _context.SaveChanges() != 0;
+
+            if (result)
+            {
+                return Ok("User updated successfully");
+            }
+
+            return StatusCode(500, "An error occurred while updating the user");
+        }
+
+        // public bool UpdateUsername(int id, string username)
+        // {
+        //     UserModel foundUser = GetUserById(id);
+
+        //     bool result = false;
+
+        //     if (foundUser != null)
+        //     {
+        //         foundUser.Username = username;
+        //         _context.Update<UserModel>(foundUser);
+        //         result = _context.SaveChanges() != 0;
+        //     }
+
+        //     return result;
+        // }
+
+        public UserModel GetUserById(int id)
+        {
             return _context.UserInfo.SingleOrDefault(user => user.ID == id);
         }
 
-        public bool DeleteUser(string userToDelete){
+        public bool DeleteUser(string userToDelete)
+        {
             UserModel foundUser = GetUserByUsername(userToDelete);
             bool result = false;
 
-            if(foundUser != null){
+            if (foundUser != null)
+            {
                 _context.Remove<UserModel>(foundUser);
                 result = _context.SaveChanges() != 0;
             }

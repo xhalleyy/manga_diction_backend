@@ -15,6 +15,7 @@ Requirements/ Pages:
 
 Controllers Folder: 
 - User Controller
+    - LOGIN (POST), GET USER, CREATE USER, UPDATE USER,
 - Club Controller
     - GET ALL, GET ALL PUBLIC CLUBS, GET CLUB BY ID, GET CLUB BY NAME, GET CLUB BY DATES, CREATE CLUB, UPDATE CLUB, DELETE CLUB
 - Posts Controller
