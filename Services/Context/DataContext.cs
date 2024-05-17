@@ -85,7 +85,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Jujutsu Lovers<3",
                     Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
                     Description = "Gege Akutami hates his readers!",
-                    DateCreated = "2024-04-05",
+                    DateCreated = "2024-04-05 09:10:11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
@@ -97,7 +97,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Villainess Arc",
                     Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
                     Description = "strong and evil FLs lol",
-                    DateCreated = "2024-04-06",
+                    DateCreated = "2024-04-06 09:10:11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
@@ -108,7 +108,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Psychological Manhwas",
                     Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
                     Description = "scared but i cant stop reading...",
-                    DateCreated = "2024-04-10",
+                    DateCreated = "2024-04-10 09:10:11",
                     isMature = true,
                     IsPublic = true,
                     IsDeleted = false
@@ -119,7 +119,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Best Webtoons",
                     Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
                     Description = "Talk about Webtoons!",
-                    DateCreated = "2024-04-11",
+                    DateCreated = "2024-04-11 09:10:11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
@@ -130,7 +130,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Solo Leveling!",
                     Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
                     Description = "Rave about Solo Leveling!!!",
-                    DateCreated = "2024-04-11",
+                    DateCreated = "2024-04-11 08:10:11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false
@@ -141,7 +141,7 @@ namespace manga_diction_backend.Services.Context
                     ClubName = "Shoujo 4ever ",
                     Image = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg",
                     Description = "Shoujo debatably has the best mangas!",
-                    DateCreated = "2024-04-09",
+                    DateCreated = "2024-04-09 10:10:11",
                     isMature = false,
                     IsPublic = true,
                     IsDeleted = false

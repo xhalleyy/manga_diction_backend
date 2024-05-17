@@ -168,7 +168,6 @@ namespace manga_diction_backend.Services
                 return NotFound("User not found");
             }
 
-            // Handle password change if provided
             if (!string.IsNullOrEmpty(model.CurrentPassword) && !string.IsNullOrEmpty(model.NewPassword))
             {
                 // Verify the current password

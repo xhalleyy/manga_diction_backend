@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using manga_diction_backend.Models;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace manga_diction_backend.Services
 {
@@ -19,6 +20,15 @@ namespace manga_diction_backend.Services
 
         public async Task<ActionResult<FavoritedModel>> AddFavoriteManga(int userId, [FromBody] FavoritedModel favorited)
         {
+            // Check for duplicates
+            var existingFavorite = await _context.FavoritedInfo
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.MangaId == favorited.MangaId);
+
+            if (existingFavorite != null)
+            {
+                return Conflict("Manga is already in the favorites list.");
+            }
+
             var newFavorite = new FavoritedModel
             {
                 UserId = userId,
@@ -50,9 +60,11 @@ namespace manga_diction_backend.Services
             return Ok(completedFavorites);
         }
 
-        public async Task<ActionResult<FavoritedModel>> DeleteFavoriteManga(int id)
+        public async Task<ActionResult> DeleteFavoriteManga(int userId, string mangaId)
         {
-            var favoriteToDelete = _context.FavoritedInfo.Find(id);
+            // Find the favorite by userId and mangaId
+            var favoriteToDelete = await _context.FavoritedInfo
+                .FirstOrDefaultAsync(f => f.UserId == userId && f.MangaId == mangaId);
 
             if (favoriteToDelete == null)
             {

@@ -43,10 +43,10 @@ namespace manga_diction_backend.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteFavoriteManga/{id}")]
-        public async Task<ActionResult<FavoritedModel>> DeleteFavoriteManga(int id)
+        [Route("DeleteFavoriteManga/{userId}/{mangaId}")]
+        public async Task<ActionResult> DeleteFavoriteManga(int userId, string mangaId)
         {
-            return await _data.DeleteFavoriteManga(id);
+            return await _data.DeleteFavoriteManga(userId, mangaId);
         }
     }
 
