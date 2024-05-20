@@ -166,6 +166,7 @@ namespace fullstackbackend.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
+                    CommentId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     LikedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -185,12 +186,12 @@ namespace fullstackbackend.Migrations
                 columns: new[] { "ID", "ClubName", "DateCreated", "Description", "Image", "IsDeleted", "IsPublic", "LeaderId", "isMature" },
                 values: new object[,]
                 {
-                    { 1, "Jujutsu Lovers<3", "2024-04-05", "Gege Akutami hates his readers!", "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80", false, true, 1, false },
-                    { 2, "Villainess Arc", "2024-04-06", "strong and evil FLs lol", "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png", false, true, 1, false },
-                    { 3, "Psychological Manhwas", "2024-04-10", "scared but i cant stop reading...", "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg", false, true, 3, true },
-                    { 4, "Best Webtoons", "2024-04-11", "Talk about Webtoons!", "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg", false, true, 3, false },
-                    { 5, "Solo Leveling!", "2024-04-11", "Rave about Solo Leveling!!!", "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg", false, true, 3, false },
-                    { 6, "Shoujo 4ever ", "2024-04-09", "Shoujo debatably has the best mangas!", "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg", false, true, 2, false }
+                    { 1, "Jujutsu Lovers<3", "2024-04-05 09:10:11", "Gege Akutami hates his readers!", "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80", false, true, 1, false },
+                    { 2, "Villainess Arc", "2024-04-06 09:10:11", "strong and evil FLs lol", "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png", false, true, 1, false },
+                    { 3, "Psychological Manhwas", "2024-04-10 09:10:11", "scared but i cant stop reading...", "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg", false, true, 3, true },
+                    { 4, "Best Webtoons", "2024-04-11 09:10:11", "Talk about Webtoons!", "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg", false, true, 3, false },
+                    { 5, "Solo Leveling!", "2024-04-11 08:10:11", "Rave about Solo Leveling!!!", "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg", false, true, 3, false },
+                    { 6, "Shoujo 4ever ", "2024-04-09 10:10:11", "Shoujo debatably has the best mangas!", "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg", false, true, 2, false }
                 });
 
             migrationBuilder.InsertData(

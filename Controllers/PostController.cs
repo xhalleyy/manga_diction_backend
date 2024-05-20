@@ -25,6 +25,12 @@ namespace manga_diction_backend.Controllers
             return _data.GetAllPostsInClub(clubId);
         }
 
+        [HttpGet]
+        [Route("GetRecentPostsForUserClubs/{userId}")]
+        public IActionResult GetRecentPostsForUserClubs(int userId){
+            return _data.GetRecentPostsForUserClubs(userId);
+        }
+
         // Get Posts by Category
         [HttpGet]
         [Route("GetPostsByCategory/{clubId}/{category}")]
@@ -93,6 +99,6 @@ namespace manga_diction_backend.Controllers
             return _data.DeletePost(postToDelete);
         }
         
-
+    
     }
 }

@@ -11,6 +11,7 @@ namespace manga_diction_backend.Models
     {
         public int Id { get; set; }
         public int PostId { get; set; }
+        public int? CommentId { get; set; }
         public int UserId { get; set; }
         public DateTime LikedAt { get; set; }
 

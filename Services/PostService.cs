@@ -118,5 +118,32 @@ namespace manga_diction_backend.Services
             _context.Update<PostModel>(postToDelete);
             return _context.SaveChanges() != 0;
         }
+
+        // GET RECENT POSTS FROM CLUBS A USER IS IN
+        public IActionResult GetRecentPostsForUserClubs(int userId){
+            var clubIds = _context.MemberInfo
+                .Where(user => user.UserId == userId && user.Status == MemberStatus.Accepted)
+                .Select(user => user.ClubId)
+                .ToList();
+
+            var leaderClubIds = _context.ClubInfo
+                .Where(club => club.LeaderId == userId)
+                .Select(club => club.ID)
+                .ToList();
+
+            var allClubIds = clubIds.Union(leaderClubIds).ToList();
+
+            if(!allClubIds.Any()){
+                return NotFound("User is not a member of any clubs!");
+            }
+
+            // selecting posts that has the same club id as clubIds and is NOT deleted; then sorting and taking 3 of the most recents; make to a list and return it
+            var recentPosts = _context.PostInfo.Where(post => allClubIds.Contains(post.ClubId) && !post.IsDeleted)
+                .OrderByDescending(post => post.DateCreated)
+                .Take(3)
+                .ToList();
+
+            return Ok(recentPosts);
+        }
     }
 }

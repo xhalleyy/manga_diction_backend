@@ -63,7 +63,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 1,
                             ClubName = "Jujutsu Lovers<3",
-                            DateCreated = "2024-04-05",
+                            DateCreated = "2024-04-05 09:10:11",
                             Description = "Gege Akutami hates his readers!",
                             Image = "https://p325k7wa.twic.pics/high/jujutsu-kaisen/jujutsu-kaisen-cursed-clash/00-page-setup/JJK-header-mobile2.jpg?twic=v1/resize=760/step=10/quality=80",
                             IsDeleted = false,
@@ -75,7 +75,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 2,
                             ClubName = "Villainess Arc",
-                            DateCreated = "2024-04-06",
+                            DateCreated = "2024-04-06 09:10:11",
                             Description = "strong and evil FLs lol",
                             Image = "https://static.animecorner.me/2022/09/villainess-manhwa-manga-novel-1024x576.png",
                             IsDeleted = false,
@@ -87,7 +87,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 3,
                             ClubName = "Psychological Manhwas",
-                            DateCreated = "2024-04-10",
+                            DateCreated = "2024-04-10 09:10:11",
                             Description = "scared but i cant stop reading...",
                             Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/10/best-horror-manhwa-featured-image.jpg",
                             IsDeleted = false,
@@ -99,7 +99,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 4,
                             ClubName = "Best Webtoons",
-                            DateCreated = "2024-04-11",
+                            DateCreated = "2024-04-11 09:10:11",
                             Description = "Talk about Webtoons!",
                             Image = "https://academychronicle.com/wp-content/uploads/2021/03/Webtoons-900x472.jpg",
                             IsDeleted = false,
@@ -111,7 +111,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 5,
                             ClubName = "Solo Leveling!",
-                            DateCreated = "2024-04-11",
+                            DateCreated = "2024-04-11 08:10:11",
                             Description = "Rave about Solo Leveling!!!",
                             Image = "https://static1.srcdn.com/wordpress/wp-content/uploads/2023/12/solo-leveling.jpg",
                             IsDeleted = false,
@@ -123,7 +123,7 @@ namespace fullstackbackend.Migrations
                         {
                             ID = 6,
                             ClubName = "Shoujo 4ever ",
-                            DateCreated = "2024-04-09",
+                            DateCreated = "2024-04-09 10:10:11",
                             Description = "Shoujo debatably has the best mangas!",
                             Image = "https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/09/shoujo-male-leads.jpg",
                             IsDeleted = false,
@@ -214,6 +214,9 @@ namespace fullstackbackend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CommentId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("LikedAt")
                         .HasColumnType("datetime2");

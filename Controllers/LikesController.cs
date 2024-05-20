@@ -25,16 +25,34 @@ namespace manga_diction_backend.Controllers
             return await _data.GetLikesForPost(postId);
         }
 
+        [HttpGet]
+        [Route("GetLikesForComment/{commentId}")]
+        public async Task<ActionResult<LikesResponseDTO>> GetLikesForComment(int commentId){
+            return await _data.GetLikesForComment(commentId);
+        }
+
         [HttpPost]
         [Route("AddLikeToPost/{postId}/{userId}")]
         public async Task<ActionResult<LikesModel>> AddLikeToPost(int postId, int userId){
             return await _data.AddLikeToPost(postId, userId);
         }
 
+        [HttpPost]
+        [Route("AddLikeToComment/{commentId}/{userId}")]
+        public async Task<ActionResult<LikesModel>> AddLikeToComment(int commentId, int userId){
+            return await _data.AddLikeToComment(commentId, userId);
+        }
+
         [HttpDelete]
         [Route("RemoveLike/{postId}/{userId}")]
         public async Task<ActionResult<bool>> RemoveLike(int postId, int userId){
             return await _data.RemoveLike(postId, userId);
+        }
+
+        [HttpDelete]
+        [Route("RemoveCommentLike/{commentId}/{userId}")]
+        public async Task<ActionResult<bool>> RemoveCommentLike(int commentId, int userId){
+            return await _data.RemoveCommentLike(commentId, userId);
         }
     }
 }

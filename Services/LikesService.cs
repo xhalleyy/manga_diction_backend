@@ -45,6 +45,35 @@ namespace manga_diction_backend.Services
             }
         }
 
+        public async Task<ActionResult<LikesResponseDTO>> GetLikesForComment(int commentId)
+        {
+            try
+            {
+                int likesCount = await _context.LikesInfo.CountAsync(like => like.CommentId == commentId);
+                var likes = await _context.LikesInfo
+                    .Include(like => like.User)
+                    .Where(like => like.CommentId == commentId)
+                    .ToListAsync();
+
+                var likesResponse = new LikesResponseDTO
+                {
+                    LikesCount = likesCount,
+                    LikedByUsers = likes.Select(like => new LikesByUserDTO
+                    {
+                        UserId = like.UserId,
+                        Username = like.User.Username // Assuming UserModel has a Username property
+                    }).ToList()
+                };
+
+                return likesResponse;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error getting likes for post: {ex.Message}");
+            }
+        }
+
         public async Task<LikesModel> AddLikeToPost(int postId, int userId)
         {
             try
@@ -82,6 +111,45 @@ namespace manga_diction_backend.Services
             }
         }
 
+        public async Task<ActionResult<LikesModel>> AddLikeToComment(int commentId, int userId)
+        {
+            try
+            {
+                // Check if the user already liked this comment
+                var existingLike = await _context.LikesInfo
+                    .FirstOrDefaultAsync(like => like.CommentId == commentId && like.UserId == userId);
+
+                if (existingLike != null)
+                {
+                    return BadRequest("You have already liked this comment.");
+                }
+
+                // Create the new like
+                var like = new LikesModel
+                {
+                    CommentId = commentId,
+                    UserId = userId,
+                    LikedAt = DateTime.UtcNow
+                };
+
+                // Add and save the like to the database
+                _context.LikesInfo.Add(like);
+                await _context.SaveChangesAsync();
+
+                // Fetch the like with the related User entity
+                var likedWithUser = await _context.LikesInfo
+                    .Include(l => l.User)
+                    .FirstOrDefaultAsync(l => l.Id == like.Id);
+
+                return Ok(likedWithUser);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error adding like: {ex.Message}");
+            }
+        }
+
+
         public async Task<ActionResult<bool>> RemoveLike(int postId, int userId)
         {
             try
@@ -94,7 +162,27 @@ namespace manga_diction_backend.Services
 
                 _context.LikesInfo.Remove(like);
                 await _context.SaveChangesAsync();
-                return true; // Indicate successful removal
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error removing like: {ex.Message}");
+            }
+        }
+
+        public async Task<ActionResult<bool>> RemoveCommentLike(int commentId, int userId)
+        {
+            try
+            {
+                var like = await _context.LikesInfo.FirstOrDefaultAsync(like => like.CommentId == commentId && like.UserId == userId);
+                if (like == null)
+                {
+                    throw new Exception("Like not found.");
+                }
+
+                _context.LikesInfo.Remove(like);
+                await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception ex)
             {
