@@ -39,19 +39,25 @@ namespace manga_diction_backend.Controllers
         }
         // ADD CLUB TO USER ID
         [HttpPost]
-        [Route("AddMemberToClub")]
-        public async Task<IActionResult> AddMemberToClub(int userId, int clubId){
-            return await _data.AddMemberToClub(userId, clubId);
+        [Route("AddMemberToClub/{userId}/{clubId}/{isLeader}")]
+        public async Task<IActionResult> AddMemberToClub(int userId, int clubId, bool isLeader){
+            return await _data.AddMemberToClub(userId, clubId, isLeader);
         }
 
         // GET PENDING REQUESTS AS LEADER
         [HttpGet]
-        [Route("GetPendingRequest")]
+        [Route("GetPendingRequest/{userId}")]
         public List<ClubMembers> GETPENDINGREQUESTFORCLUB(int userId)
         {
             return _data.GETPENDINGREQUESTFORCLUB(userId);
         }
+
         // UPDATE INVITE REQUEST AS LEADER
+        [HttpPut]
+        [Route("UpdatePendingStatus/{id}")]
+        public async Task<IActionResult> UpdatePendingStatus(int id, [FromBody] string newStatus){
+            return await _data.UpdatePendingStatus(id, newStatus);
+        }
 
 
         // DELETE USER IN CLUB MEMBERS

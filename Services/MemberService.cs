@@ -7,6 +7,7 @@ using manga_diction_backend.Models;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace manga_diction_backend.Services
 {
@@ -31,34 +32,48 @@ namespace manga_diction_backend.Services
         // // GET PENDING REQUEST BY CLUB ID
         public List<ClubMembers> GETPENDINGREQUESTFORCLUB(int userId)
         {
-            // getting leaders clubs and the name of it
-            List<ClubMembers>? ClubMembers = new List<ClubMembers>();
-            var clubs = _context.ClubInfo.Where(club => club.LeaderId == userId && club.IsPublic == false && club.IsDeleted == false)
+            List<ClubMembers> ClubMembers = new List<ClubMembers>();
+
+            var clubs = _context.ClubInfo
+                .Where(club => club.LeaderId == userId && club.IsPublic == false && club.IsDeleted == false)
                 .Select(club => new { ClubName = club.ClubName, ClubId = club.ID })
                 .ToList();
-          
-                foreach (var club in clubs)
+
+            foreach (var club in clubs)
+            {
+                List<MemberModel> pendingMembers = _context.MemberInfo
+                    .Where(member => member.ClubId == club.ClubId && member.Status == MemberStatus.Pending)
+                    .ToList();
+
+                List<MembersIdAndName> allPendingMembers = new List<MembersIdAndName>();
+                foreach (var member in pendingMembers)
                 {
-                    //
-                    List<int> pendingUserId = _context.MemberInfo.Where(member => member.ClubId == club.ClubId && member.Status == MemberStatus.Pending)
-                        .Select(member => member.UserId)
-                        .ToList();
-                    List<MembersIdAndName> allPendingMembers = new List<MembersIdAndName>();
-                    foreach (int id in pendingUserId)
+                    UserModel userInfo = _context.UserInfo.SingleOrDefault(user => user.ID == member.UserId);
+                    if (userInfo != null)
                     {
-                        UserModel memberName = _context.UserInfo.SingleOrDefault(user => user.ID == id);
-                        allPendingMembers.Add(new MembersIdAndName { memberId = id, name = memberName.Username, profilepic = memberName.ProfilePic });
-
+                        allPendingMembers.Add(new MembersIdAndName
+                        {
+                            Id = member.Id, // Use the MemberInfo Id instead of UserInfo ID
+                            memberId = userInfo.ID,
+                            name = userInfo.Username,
+                            profilepic = userInfo.ProfilePic
+                        });
                     }
-                    ClubMembers.Add(new ClubMembers { ClubName = club.ClubName, ClubId = club.ClubId, Members = allPendingMembers });
-
-                    // get all pending invites for the club
                 }
-            
-            // need to return the club name and the user name and user id
-            return ClubMembers;
 
+                ClubMembers.Add(new ClubMembers
+                {
+                    ClubName = club.ClubName,
+                    ClubId = club.ClubId,
+                    Members = allPendingMembers
+                });
+            }
+
+            return ClubMembers;
         }
+
+        // GET INVITED REQUESTS BY USER ID
+
 
         // GET CLUB MEMBERS BY CLUB ID; BASED ON ACCEPTED STATUS
         public IActionResult GetClubMembers(int clubId)
@@ -103,7 +118,7 @@ namespace manga_diction_backend.Services
             }
         }
 
-        public async Task<IActionResult> AddMemberToClub(int userId, int clubId)
+        public async Task<IActionResult> AddMemberToClub(int userId, int clubId, bool isLeader)
         {
             try
             {
@@ -125,7 +140,7 @@ namespace manga_diction_backend.Services
                 {
                     UserId = userId,
                     ClubId = clubId,
-                    Status = club.IsPublic ? MemberStatus.Accepted : MemberStatus.Pending
+                    Status = club.IsPublic ? MemberStatus.Accepted : (!club.IsPublic && isLeader ? MemberStatus.Accepted : MemberStatus.Pending)
                 };
 
                 _context.MemberInfo.Add(userClub);
@@ -138,6 +153,47 @@ namespace manga_diction_backend.Services
                 return StatusCode(500, $"Error adding member: {ex.Message}");
             }
         }
+
+        public async Task<IActionResult> UpdatePendingStatus(int id, [FromBody] string newStatus)
+        {
+            try
+            {
+                var existingMember = await _context.MemberInfo.FirstOrDefaultAsync(m => m.Id == id);
+
+                if (existingMember == null)
+                {
+                    return NotFound("Member not found");
+                }
+
+                if (string.IsNullOrWhiteSpace(newStatus))
+                {
+                    return BadRequest("New status is required.");
+                }
+
+                string statusLowerCase = newStatus.ToLower();
+                if (statusLowerCase == "accept")
+                {
+                    existingMember.Status = MemberStatus.Accepted;
+                    await _context.SaveChangesAsync();
+                    return Ok("User successfully joined!");
+                }
+                else if (statusLowerCase == "deny")
+                {
+                    existingMember.Status = MemberStatus.Denied;
+                    await _context.SaveChangesAsync();
+                    return Ok("User denied from Club!");
+                }
+                else
+                {
+                    return BadRequest("Invalid action specified. Please specify 'accept' or 'deny'.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error updating member status: {ex.Message}");
+            }
+        }
+
 
         // This function removes a specific user from a specific club 
         public async Task<IActionResult> RemoveMemberFromClub(int userId, int clubId)

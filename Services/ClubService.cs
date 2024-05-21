@@ -19,7 +19,7 @@ namespace manga_diction_backend.Services
         }
         public IEnumerable<ClubModel> GetAllClubs()
         {
-            return _context.ClubInfo;
+            return _context.ClubInfo.Where(clubs => !clubs.IsDeleted).ToList();
         }
 
         public async Task<List<ClubModel>> GetClubsByLeaderAsync(int leaderId)
@@ -28,7 +28,7 @@ namespace manga_diction_backend.Services
                 .Where(c => c.LeaderId == leaderId)
                 .ToListAsync();
         }
-        
+
         public IEnumerable<ClubModel> GetAllPublicClubs(bool recent = true)
         {
             var allItems = GetAllClubs().ToList();
@@ -66,8 +66,10 @@ namespace manga_diction_backend.Services
 
         public List<ClubModel> GetClubsByName(string clubName)
         {
-            var allItems = GetAllClubs().ToList();
-            var filteredItems = allItems.Where(club => club.ClubName.Contains(clubName)).ToList();
+            var allItems = GetAllClubs();
+            var filteredItems = allItems
+                .Where(club => club.ClubName.IndexOf(clubName, StringComparison.OrdinalIgnoreCase) >= 0)
+                .ToList();
 
             return filteredItems;
         }
