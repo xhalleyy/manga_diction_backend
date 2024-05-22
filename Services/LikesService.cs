@@ -74,6 +74,50 @@ namespace manga_diction_backend.Services
             }
         }
 
+        public async Task<List<RecentLikesDTO>> GetRecentLikes(int userId)
+        {
+
+            var latestPosts = await _context.PostInfo
+                .Where(p => p.UserId == userId)
+                .OrderByDescending(p => p.DateCreated)
+                .Take(3)
+                .Select(p => p.ID)
+                .ToListAsync();
+
+            if (!latestPosts.Any())
+            {
+                return new List<RecentLikesDTO>(); 
+            }
+
+            var recentLikes = await _context.LikesInfo
+                .Where(l => latestPosts.Contains(l.PostId))
+                .OrderByDescending(l => l.LikedAt)
+                .Include(l => l.User) 
+                .ToListAsync();
+
+
+            var groupedLikes = recentLikes
+                .GroupBy(l => l.PostId)
+                .Select(group => new RecentLikesDTO
+                {
+                    PostId = group.Key,
+                    Likes = new LikesResponseDTO
+                    {
+                        LikesCount = group.Count(),
+                        LikedByUsers = group
+                            .Select(l => new LikesByUserDTO
+                            {
+                                UserId = l.UserId,
+                                Username = l.User.Username
+                            })
+                            .ToList()
+                    }
+                })
+                .ToList();
+
+            return groupedLikes;
+        }
+
         public async Task<LikesModel> AddLikeToPost(int postId, int userId)
         {
             try

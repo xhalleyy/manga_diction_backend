@@ -14,6 +14,14 @@ C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Micr
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Http.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Logging.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Options.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Extensions.Primitives.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Identity.Client.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\publish\Microsoft.IdentityModel.Abstractions.dll

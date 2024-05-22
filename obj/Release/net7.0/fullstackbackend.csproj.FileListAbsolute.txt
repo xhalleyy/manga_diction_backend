@@ -152,3 +152,11 @@ C:\Users\Halley\Documents\CodeStack\manga_diction_backend\obj\Release\net7.0\ref
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\obj\Release\net7.0\fullstackbackend.pdb
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\obj\Release\net7.0\fullstackbackend.genruntimeconfig.cache
 C:\Users\Halley\Documents\CodeStack\manga_diction_backend\obj\Release\net7.0\ref\fullstackbackend.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Http.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Logging.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Release\net7.0\Microsoft.Extensions.Primitives.dll
