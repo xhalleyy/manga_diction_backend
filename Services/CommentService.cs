@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using manga_diction_backend.Models;
+using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,49 @@ namespace manga_diction_backend.Services
         public CommentService(DataContext context)
         {
             _context = context;
+        }
+
+        // GET COMMENT BY ID
+        public IActionResult GetCommentById(int id)
+        {
+            try
+            {
+                var comment = _context.CommentInfo.FirstOrDefault(c => c.ID == id);
+                if (comment == null)
+                {
+                    return Ok("User doesn't have any like notifications");
+                }
+
+                return Ok(comment);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        public async Task<ActionResult<List<UserCommentDTO>>> GetUserComments(int userId)
+        {
+            var userComments = await _context.CommentInfo
+                .Where(c => c.UserId == userId)
+                .Include(c => c.User)
+                .Select(c => new UserCommentDTO
+                {
+                    UserId = c.User.ID,
+                    Username = c.User.Username,
+                    Comments = new List<CommentDTO>
+                    {
+                new CommentDTO
+                {
+                    CommentId = c.ID,
+                    Reply = c.Reply,
+                    PostedAt = c.PostedAt
+                }
+                    }
+                })
+                .ToListAsync();
+
+            return userComments;
         }
 
         // Get Replies from Posts
@@ -143,29 +187,6 @@ namespace manga_diction_backend.Services
                 return StatusCode(500, $"Error updating reply: {ex.Message}");
             }
         }
-
-        // Might not need this. Duplicate of the above xD
-        // public async Task<IActionResult> UpdateReplyFromComment(int replyId, [FromBody] string reply)
-        // {
-        //     try
-        //     {
-        //         var replyToUpdate = await _context.CommentInfo.FirstOrDefaultAsync(reply => reply.ID == replyId);
-
-        //         if (replyToUpdate == null)
-        //         {
-        //             return NotFound("Reply not found");
-        //         }
-
-        //         replyToUpdate.Reply = reply;
-        //         _context.CommentInfo.Update(replyToUpdate);
-        //         return Ok("Reply updated successfully");
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return StatusCode(500, $"Error updating reply: {ex.Message}");
-        //     }
-        // }
-
 
         public async Task<IActionResult> DeleteComment(int commentId)
         {

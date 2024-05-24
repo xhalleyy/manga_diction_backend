@@ -28,10 +28,16 @@ namespace manga_diction_backend.Controllers
         }
 
         [HttpGet]
-        [Route("GetRecentLikes/{userId}")]
-        public async Task<ActionResult<List<RecentLikesDTO>>> GetRecentLikes(int userId)
+        [Route("GetPostRecentLikes/{userId}")]
+        public async Task<ActionResult<List<RecentLikesDTO>>> GetPostRecentLikes(int userId)
         {
-            return await _data.GetRecentLikes(userId);
+            return await _data.GetPostRecentLikes(userId);
+        }
+
+        [HttpGet]
+        [Route("GetCommentRecentLikes/{userId}")]
+        public async Task<ActionResult<List<RecentLikesDTO>>> GetCommentRecentLikes(int userId){
+            return await _data.GetCommentRecentLikes(userId);
         }
 
         [HttpGet]

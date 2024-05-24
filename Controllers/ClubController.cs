@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using manga_diction_backend.Models;
+using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -67,6 +68,12 @@ namespace manga_diction_backend.Controllers
         [Route("GetOldestPublicClubs")]
         public List<ClubModel> GetOldestPublicClubs(){
             return _data.GetOldestPublicClubs().ToList();
+        }
+
+        [HttpGet]
+        [Route("GetPopularClubs")]
+        public async Task<ActionResult<List<ClubMemberCountDTO>>> GetPopularClubs(){
+           return await _data.GetPopularClubs(); 
         }
 
         // Create Club

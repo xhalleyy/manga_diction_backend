@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using manga_diction_backend.Models;
+using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -61,7 +62,7 @@ namespace manga_diction_backend.Services
 
         public ClubModel GetClubById(int id)
         {
-            return _context.ClubInfo.SingleOrDefault(club => club.ID == id);
+            return _context.ClubInfo.SingleOrDefault(club => club.ID == id && club.IsDeleted != true);
         }
 
         public List<ClubModel> GetClubsByName(string clubName)
@@ -92,6 +93,28 @@ namespace manga_diction_backend.Services
             clubToDelete.IsDeleted = true;
             _context.Update<ClubModel>(clubToDelete);
             return _context.SaveChanges() != 0;
+        }
+
+        public async Task<ActionResult<List<ClubMemberCountDTO>>> GetPopularClubs()
+        {
+            var topClubs = await _context.ClubInfo
+                    .Where(c => !c.IsDeleted)
+                    .Select(c => new ClubMemberCountDTO
+                    {
+                        ClubId = c.ID,
+                        ClubName = c.ClubName,
+                        Image = c.Image,
+                        Description = c.Description,
+                        DateCreated = DateTime.Parse(c.DateCreated),
+                        IsMature = c.isMature,
+                        IsPublic = c.IsPublic,
+                        MemberCount = _context.MemberInfo.Count(m => m.ClubId == c.ID && m.Status == MemberStatus.Accepted)
+                    })
+                    .OrderByDescending(c => c.MemberCount)
+                    .Take(6)
+                    .ToListAsync();
+
+            return Ok(topClubs);
         }
     }
 

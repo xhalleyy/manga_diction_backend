@@ -6,6 +6,7 @@ using manga_diction_backend.Models;
 using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services.Context;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace manga_diction_backend.Services
 {
@@ -89,7 +90,7 @@ namespace manga_diction_backend.Services
             newPost.ClubId = clubId;
             DateTime currentUtcTime = DateTime.UtcNow;
             string formattedTime = currentUtcTime.ToString("yyyy-MM-dd HH:mm:ss");
-            newPost.DateCreated = formattedTime; 
+            newPost.DateCreated = formattedTime;
 
             // Format tags
             if (!string.IsNullOrEmpty(newPost.Tags))
@@ -120,7 +121,8 @@ namespace manga_diction_backend.Services
         }
 
         // GET RECENT POSTS FROM CLUBS A USER IS IN
-        public IActionResult GetRecentPostsForUserClubs(int userId){
+        public IActionResult GetRecentPostsForUserClubs(int userId)
+        {
             var clubIds = _context.MemberInfo
                 .Where(user => user.UserId == userId && user.Status == MemberStatus.Accepted)
                 .Select(user => user.ClubId)
@@ -133,17 +135,75 @@ namespace manga_diction_backend.Services
 
             var allClubIds = clubIds.Union(leaderClubIds).ToList();
 
-            if(!allClubIds.Any()){
-                return NotFound("User is not a member of any clubs!");
+            if (!allClubIds.Any())
+            {
+                return Ok("User is not a member of any clubs!");
             }
 
             // selecting posts that has the same club id as clubIds and is NOT deleted; then sorting and taking 3 of the most recents; make to a list and return it
             var recentPosts = _context.PostInfo.Where(post => allClubIds.Contains(post.ClubId) && !post.IsDeleted)
                 .OrderByDescending(post => post.DateCreated)
-                .Take(3)
+                .Take(2)
                 .ToList();
 
             return Ok(recentPosts);
+        }
+
+        public async Task<ActionResult<List<PostWithLikesDTO>>> GetPostsByLikes(int clubId)
+        {
+            var postsWithLikes = await _context.PostInfo
+                    .Where(p => p.ClubId == clubId && !p.IsDeleted)
+                    .Select(p => new PostWithLikesDTO
+                    {
+                        PostId = p.ID,
+                        Title = p.Title,
+                        Category = p.Category,
+                        Tags = p.Tags,
+                        Description = p.Description,
+                        Image = p.Image,
+                        DateCreated = DateTime.Parse(p.DateCreated),
+                        DateUpdated = DateTime.Parse(p.DateUpdated),
+                        LikeCount = _context.LikesInfo.Count(l => l.PostId == p.ID),
+                        User = new UserModel
+                        {
+                            ID = p.UserId,
+                            Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username,
+                            ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic
+                        }
+                    })
+                    .OrderByDescending(p => p.LikeCount)
+                    .ToListAsync();
+
+            return Ok(postsWithLikes);
+        }
+
+        public async Task<ActionResult<List<PostWithCommentCountDTO>>> GetPostsByComments(int clubId)
+        {
+            var postsWithCommentCount = await _context.PostInfo
+                    .Where(p => p.ClubId == clubId && !p.IsDeleted)
+                    .Select(p => new PostWithCommentCountDTO
+                    {
+                        PostId = p.ID,
+                        Title = p.Title,
+                        Category = p.Category,
+                        Tags = p.Tags,
+                        Description = p.Description,
+                        Image = p.Image,
+                        DateCreated = DateTime.Parse(p.DateCreated),
+                        DateUpdated = DateTime.Parse(p.DateUpdated),
+                        IsDeleted = p.IsDeleted,
+                        CommentCount = _context.CommentInfo.Count(c => c.PostId == p.ID),
+                        User = new UserModel
+                        {
+                            ID = p.UserId,
+                            Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username,
+                            ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic
+                        }
+                    })
+                    .OrderByDescending(p => p.CommentCount)
+                    .ToListAsync();
+
+            return Ok(postsWithCommentCount);
         }
     }
 }

@@ -61,7 +61,7 @@ namespace manga_diction_backend.Services
                     LikedByUsers = likes.Select(like => new LikesByUserDTO
                     {
                         UserId = like.UserId,
-                        Username = like.User.Username // Assuming UserModel has a Username property
+                        Username = like.User.Username 
                     }).ToList()
                 };
 
@@ -74,13 +74,13 @@ namespace manga_diction_backend.Services
             }
         }
 
-        public async Task<List<RecentLikesDTO>> GetRecentLikes(int userId)
+        public async Task<List<RecentLikesDTO>> GetPostRecentLikes(int userId)
         {
 
             var latestPosts = await _context.PostInfo
                 .Where(p => p.UserId == userId)
                 .OrderByDescending(p => p.DateCreated)
-                .Take(3)
+                .Take(2)
                 .Select(p => p.ID)
                 .ToListAsync();
 
@@ -94,7 +94,6 @@ namespace manga_diction_backend.Services
                 .OrderByDescending(l => l.LikedAt)
                 .Include(l => l.User) 
                 .ToListAsync();
-
 
             var groupedLikes = recentLikes
                 .GroupBy(l => l.PostId)
@@ -118,12 +117,53 @@ namespace manga_diction_backend.Services
             return groupedLikes;
         }
 
+        public async Task<ActionResult<List<RecentLikesDTO>>> GetCommentRecentLikes(int userId){
+            var latestComment = await _context.CommentInfo
+                .Where(c => c.UserId == userId)
+                .OrderByDescending(c => c.PostedAt)
+                .Take(1)
+                .Select(c => c.ID)
+                .ToListAsync();
+
+            if (!latestComment.Any())
+            {
+                return new List<RecentLikesDTO>(); 
+            }
+
+            var recentLikes = await _context.LikesInfo
+                .Where(l => latestComment.Contains(l.CommentId.Value)) // making sure it compares int values not null
+                .OrderByDescending(l => l.LikedAt)
+                .Include(l => l.User) 
+                .ToListAsync();
+
+            var groupedLikes = recentLikes
+                .GroupBy(l => l.CommentId)
+                .Select(group => new RecentLikesDTO
+                {
+                    CommentId = group.Key,
+                    Likes = new LikesResponseDTO
+                    {
+                        LikesCount = group.Count(),
+                        LikedByUsers = group
+                            .Select(l => new LikesByUserDTO
+                            {
+                                UserId = l.UserId,
+                                Username = l.User.Username
+                            })
+                            .ToList()
+                    }
+                })
+                .ToList();
+
+            return groupedLikes;
+        }
+
         public async Task<LikesModel> AddLikeToPost(int postId, int userId)
         {
             try
             {
                 var existingLike = await _context.LikesInfo
-                    .Include(like => like.User) // Include the related User entity
+                    .Include(like => like.User) 
                     .FirstOrDefaultAsync(like => like.PostId == postId && like.UserId == userId);
 
                 if (existingLike != null)

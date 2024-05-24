@@ -156,7 +156,7 @@ namespace manga_diction_backend.Services.Context
                     UserId = 1,
                     ClubId = 1,
                     Category = "Spoilers",
-                    Tags = "CH.223,",
+                    Tags = "CH.223",
                     Title ="What happed to Gojo can't be real, right!?",
                     Description = "I can't believe that happened! And off-screened too... TT",
                     Image = null,

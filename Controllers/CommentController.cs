@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,42 +14,61 @@ namespace manga_diction_backend.Controllers
     {
         private readonly CommentService _data;
 
-        public CommentController (CommentService data){
+        public CommentController(CommentService data)
+        {
             _data = data;
+        }
+
+        [HttpGet]
+        [Route("GetCommentById/{id}")]
+        public IActionResult GetCommentById(int id){
+            return _data.GetCommentById(id);
+        }
+
+        // Get List of Users who Commented 
+        [HttpGet]
+        [Route("GetUserComments/{userId}")]
+        public async Task<ActionResult<List<UserCommentDTO>>> GetUserComments(int userId){
+            return await _data.GetUserComments(userId);
         }
 
         // Get Replies from Post
         [HttpGet]
         [Route("GetPostReplies/{postId}")]
-        public async Task<IActionResult> GetPostReplies(int postId){
+        public async Task<IActionResult> GetPostReplies(int postId)
+        {
             return await _data.GetPostReplies(postId);
         }
 
         // Get Replies from Comments
         [HttpGet]
         [Route("GetRepliesFromComment/{commentId}")]
-        public async Task<IActionResult> GetRepliesFromComment(int commentId){
+        public async Task<IActionResult> GetRepliesFromComment(int commentId)
+        {
             return await _data.GetRepliesFromComment(commentId);
         }
 
         // Add Reply To Post
         [HttpPost]
         [Route("AddCommentForPost/{postId}/{userId}")]
-        public async Task<IActionResult> AddCommentForPost(int postId, [FromBody] string reply, int userId){
+        public async Task<IActionResult> AddCommentForPost(int postId, [FromBody] string reply, int userId)
+        {
             return await _data.AddCommentForPost(postId, reply, userId);
         }
 
         // Add Reply To Comment]
         [HttpPost]
         [Route("AddReplyForComment/{commentId}/{userId}")]
-        public async Task<IActionResult> AddReplyForComment(int commentId, int userId, [FromBody] string reply){
+        public async Task<IActionResult> AddReplyForComment(int commentId, int userId, [FromBody] string reply)
+        {
             return await _data.AddReplyForComment(commentId, userId, reply);
         }
 
         // Updating Top Level Reply
         [HttpPut]
         [Route("UpdateReplyFromPost/{commentId}")]
-        public async Task<IActionResult> UpdateReplyFromPost(int commentId, [FromBody] string reply){
+        public async Task<IActionResult> UpdateReplyFromPost(int commentId, [FromBody] string reply)
+        {
             return await _data.UpdateReplyFromPost(commentId, reply);
         }
 
@@ -61,9 +81,10 @@ namespace manga_diction_backend.Controllers
 
         [HttpDelete]
         [Route("DeleteComment/{commentId}")]
-        public async Task<IActionResult> DeleteComment(int commentId){
+        public async Task<IActionResult> DeleteComment(int commentId)
+        {
             return await _data.DeleteComment(commentId);
         }
-        
+
     }
 }

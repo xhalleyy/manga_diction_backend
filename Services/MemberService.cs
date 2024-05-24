@@ -27,7 +27,15 @@ namespace manga_diction_backend.Services
                 .Select(uc => uc.ClubId)
                 .ToList();
 
-            return Ok(clubIds);
+            if (clubIds.Count > 0)
+            {
+                return Ok(clubIds);
+            }
+            else
+            {
+                // Return an empty array to indicate no club IDs found
+                return Ok(new int[0]);
+            }
         }
         // // GET PENDING REQUEST BY CLUB ID
         public List<ClubMembers> GETPENDINGREQUESTFORCLUB(int userId)
@@ -83,7 +91,15 @@ namespace manga_diction_backend.Services
                 .Select(clubM => clubM.UserId)
                 .ToList();
 
-            return Ok(memberIds);
+            if (memberIds.Count > 0)
+            {
+                return Ok(memberIds);
+            }
+            else
+            {
+                // Return an empty array to indicate no club IDs found
+                return Ok(new int[0]);
+            }
         }
 
         // ADD CLUB TO USER 

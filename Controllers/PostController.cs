@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using manga_diction_backend.Models;
+using manga_diction_backend.Models.DTO;
 using manga_diction_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,18 @@ namespace manga_diction_backend.Controllers
         [Route("GetRecentPostsForUserClubs/{userId}")]
         public IActionResult GetRecentPostsForUserClubs(int userId){
             return _data.GetRecentPostsForUserClubs(userId);
+        }
+
+        [HttpGet]
+        [Route("GetPostsByLikes/{clubId}")]
+        public async Task<ActionResult<List<PostWithLikesDTO>>> GetPostsByLikes(int clubId){
+            return await _data.GetPostsByLikes(clubId);
+        }
+
+        [HttpGet]
+        [Route("GetPostsByComments/{clubId}")]
+        public async Task<ActionResult<List<PostWithCommentCountDTO>>> GetPostsByComments(int clubId){
+            return await _data.GetPostsByComments(clubId);
         }
 
         // Get Posts by Category
