@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240521054607_init")]
+    [Migration("20240524093629_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -339,7 +339,7 @@ namespace fullstackbackend.Migrations
                             DateUpdated = "2024-04-06",
                             Description = "I can't believe that happened! And off-screened too... TT",
                             IsDeleted = false,
-                            Tags = "CH.223,",
+                            Tags = "CH.223",
                             Title = "What happed to Gojo can't be real, right!?",
                             UserId = 1
                         },

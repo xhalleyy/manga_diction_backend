@@ -242,8 +242,3 @@ C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\ne
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll
-C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\web.config
-C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\appsettings.Development.json
-C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\appsettings.json
-C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.deps.json
-C:\Users\Halley\Documents\CodeStack\FullStack\manga_diction_backend\bin\Debug\net7.0\publish\fullstackbackend.runtimeconfig.json

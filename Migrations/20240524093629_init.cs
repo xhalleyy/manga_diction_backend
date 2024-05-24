@@ -199,7 +199,7 @@ namespace fullstackbackend.Migrations
                 columns: new[] { "ID", "Category", "ClubId", "DateCreated", "DateUpdated", "Description", "Image", "IsDeleted", "Tags", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Spoilers", 1, "2024-04-05", "2024-04-06", "I can't believe that happened! And off-screened too... TT", null, false, "CH.223,", "What happed to Gojo can't be real, right!?", 1 },
+                    { 1, "Spoilers", 1, "2024-04-05", "2024-04-06", "I can't believe that happened! And off-screened too... TT", null, false, "CH.223", "What happed to Gojo can't be real, right!?", 1 },
                     { 2, "Discussion", 1, "2024-04-06", "2024-04-07", null, null, false, null, "Who is your guys' favorite character that is currently ALIVE!?", 1 },
                     { 3, "Discussion", 1, "2024-04-08", null, "Why is Gege Akutami killing off EVERYBODY?????", null, true, null, "I got some words to say to Gege...", 2 }
                 });
