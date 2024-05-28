@@ -72,7 +72,7 @@ namespace manga_diction_backend.Controllers
 
         [HttpGet]
         [Route("GetPopularClubs")]
-        public async Task<ActionResult<List<ClubMemberCountDTO>>> GetPopularClubs(){
+        public async Task<ActionResult<List<ClubModel>>> GetPopularClubs(){
            return await _data.GetPopularClubs(); 
         }
 

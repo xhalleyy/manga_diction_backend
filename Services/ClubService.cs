@@ -95,24 +95,25 @@ namespace manga_diction_backend.Services
             return _context.SaveChanges() != 0;
         }
 
-        public async Task<ActionResult<List<ClubMemberCountDTO>>> GetPopularClubs()
+        public async Task<ActionResult<List<ClubModel>>> GetPopularClubs()
         {
             var topClubs = await _context.ClubInfo
-                    .Where(c => !c.IsDeleted)
-                    .Select(c => new ClubMemberCountDTO
-                    {
-                        ClubId = c.ID,
-                        ClubName = c.ClubName,
-                        Image = c.Image,
-                        Description = c.Description,
-                        DateCreated = DateTime.Parse(c.DateCreated),
-                        IsMature = c.isMature,
-                        IsPublic = c.IsPublic,
-                        MemberCount = _context.MemberInfo.Count(m => m.ClubId == c.ID && m.Status == MemberStatus.Accepted)
-                    })
-                    .OrderByDescending(c => c.MemberCount)
-                    .Take(6)
-                    .ToListAsync();
+                .Where(c => !c.IsDeleted)
+                .Select(c => new ClubModel
+                {
+                    ID = c.ID,
+                    LeaderId = c.LeaderId,
+                    ClubName = c.ClubName,
+                    Image = c.Image,
+                    Description = c.Description,
+                    DateCreated = c.DateCreated, // Assuming DateCreated is a string in ClubModel
+                    isMature = c.isMature,
+                    IsPublic = c.IsPublic,
+                    IsDeleted = c.IsDeleted // Assuming IsDeleted is also in ClubModel
+                })
+                .OrderByDescending(c => _context.MemberInfo.Count(m => m.ClubId == c.ID && m.Status == MemberStatus.Accepted))
+                .Take(6)
+                .ToListAsync();
 
             return Ok(topClubs);
         }

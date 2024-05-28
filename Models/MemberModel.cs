@@ -8,7 +8,8 @@ namespace manga_diction_backend.Models
     public enum MemberStatus {
         Pending,
         Accepted,
-        Denied
+        Denied,
+        Default
     }
     public class MemberModel
     {

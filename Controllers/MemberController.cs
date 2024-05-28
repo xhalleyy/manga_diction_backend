@@ -52,6 +52,12 @@ namespace manga_diction_backend.Controllers
             return _data.GETPENDINGREQUESTFORCLUB(userId);
         }
 
+        [HttpGet]
+        [Route("GetUserStatusInClub/{clubId}/{userId}")]
+        public IActionResult GetUserStatusInClub(int clubId, int userId){
+            return _data.GetUserStatusInClub(clubId, userId);
+        }
+
         // UPDATE INVITE REQUEST AS LEADER
         [HttpPut]
         [Route("UpdatePendingStatus/{id}")]

@@ -59,7 +59,6 @@ namespace manga_diction_backend.Controllers
                 {"cooking", "ea2bc92d-1c26-4930-9b7c-d5c0dc1b6869"},{"supernatural", "eabc5b4c-6aff-42f3-b657-3e90cbd00b75"},{"mystery","ee968100-4191-4968-93d3-f82d72be7e46"},
                 {"adaptation", "f4122d1c-3b44-44d0-9936-ff7502c39ad3"},{"music", "f42fbf9e-188a-447b-9fdc-f19dc1e4d685"},{"full color","f5ba408b-0e7a-484d-8d49-4e9125ac96de"},
                 {"gyaru", "fad12b5e-68ba-460e-b933-9ae8318f5b65"}
-                // Add more tag mappings as needed
             };
 
             using (HttpClient httpClient = new HttpClient())
@@ -70,7 +69,7 @@ namespace manga_diction_backend.Controllers
                 try
                 {
                     // Construct the URL with query parameters
-                    string apiUrl = "manga?limit=15";
+                    string apiUrl = "manga?limit=20";
 
                     // Include manga name query parameter if provided
                     if (!string.IsNullOrEmpty(request.Name))
@@ -79,13 +78,14 @@ namespace manga_diction_backend.Controllers
                     }
 
                     // Include tag IDs if tagInput matches any tag name in the lookup table
-                     List<string> filteredList = request.TagInput.Where(item => !string.IsNullOrEmpty(item)).ToList();
+                    List<string> filteredList = request.TagInput.Where(item => !string.IsNullOrEmpty(item)).ToList();
                     if (filteredList.Count > 0)
                     {
                         foreach (string tag in filteredList)
                         {
-                             string lowerTag = tag.ToLower();
-                            if(tagLookup.ContainsKey(lowerTag)){
+                            string lowerTag = tag.ToLower();
+                            if (tagLookup.ContainsKey(lowerTag))
+                            {
 
                                 string tagId = tagLookup[lowerTag];
 
@@ -106,13 +106,8 @@ namespace manga_diction_backend.Controllers
                         apiUrl += $"&status[]={request.Status}";
                     }
 
-                    // Add contentRating parameter
                     apiUrl += "&contentRating[]=safe&contentRating[]=suggestive&contentRating[]=erotica";
-
-                    // Add order parameter
                     apiUrl += "&order%5BlatestUploadedChapter%5D=desc";
-
-                    // Add includes parameter
                     apiUrl += "&includes[]=cover_art&includes[]=author";
 
                     // Send a GET request
@@ -126,20 +121,18 @@ namespace manga_diction_backend.Controllers
                         Console.WriteLine("Response:");
                         Console.WriteLine(responseBody);
 
-                        return responseBody; // Return the response body
+                        return responseBody;
                     }
                     else
                     {
-                        // Print the status code if the request was not successful
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
-                        return null; // Return null if the request was not successful
+                        return null;
                     }
                 }
                 catch (HttpRequestException ex)
                 {
-                    // Handle any exceptions that occurred during the request
                     Console.WriteLine($"Request failed: {ex.Message}");
-                    return null; // Return null if an exception occurs
+                    return null;
                 }
             }
         }
@@ -149,35 +142,33 @@ namespace manga_diction_backend.Controllers
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                // Set the base address of the API
                 httpClient.BaseAddress = new Uri("https://api.mangadex.org/");
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "MangaDictionApi");
                 try
                 {
-                    // Send a GET request with the id parameter
+
                     HttpResponseMessage response = await httpClient.GetAsync($"manga/{id}?includes[]=cover_art&includes[]=author");
-                    // Check if the response is successful
                     if (response.IsSuccessStatusCode)
                     {
-                        // Read the content of the response as a string
+
                         string responseBody = await response.Content.ReadAsStringAsync();
                         Console.WriteLine("Response:");
                         Console.WriteLine(responseBody);
 
-                        return responseBody; // Return the response body
+                        return responseBody;
                     }
                     else
                     {
-                        // Print the status code if the request was not successful
+
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
-                        return null; // Return null if the request was not successful
+                        return null;
                     }
                 }
                 catch (HttpRequestException ex)
                 {
-                    // Handle any exceptions that occurred during the request
+
                     Console.WriteLine($"Request failed: {ex.Message}");
-                    return null; // Return null if an exception occurs
+                    return null;
                 }
             }
         }
@@ -187,14 +178,14 @@ namespace manga_diction_backend.Controllers
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                // Set the base address of the API
+                // base url of mangadex
                 httpClient.BaseAddress = new Uri("https://api.mangadex.org/");
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "MangaDictionApi");
                 try
                 {
                     // Send a GET request with the id parameter
                     HttpResponseMessage response = await httpClient.GetAsync($"author/{authorId}?includes[]=");
-                    // Check if the response is successful
+                    // Checks if the response is successful
                     if (response.IsSuccessStatusCode)
                     {
                         // Read the content of the response as a string
@@ -202,24 +193,59 @@ namespace manga_diction_backend.Controllers
                         Console.WriteLine("Response:");
                         Console.WriteLine(responseBody);
 
-                        return responseBody; // Return the response body
+                        return responseBody;
                     }
                     else
                     {
-                        // Print the status code if the request was not successful
                         Console.WriteLine($"Request failed with status code {response.StatusCode}");
-                        return null; // Return null if the request was not successful
+                        return null;
                     }
                 }
                 catch (HttpRequestException ex)
                 {
-                    // Handle any exceptions that occurred during the request
+
                     Console.WriteLine($"Request failed: {ex.Message}");
-                    return null; // Return null if an exception occurs
+                    return null;
                 }
             }
         }
 
+        [HttpGet("GetLastChapter/{chapterId}")]
+        public async Task<string> GetLastChapter(string chapterId)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                // base url of mangadex
+                httpClient.BaseAddress = new Uri("https://api.mangadex.org/");
+                httpClient.DefaultRequestHeaders.Add("User-Agent", "MangaDictionApi");
+                try
+                {
+                    // Send a GET request with the id parameter
+                    HttpResponseMessage response = await httpClient.GetAsync($"chapter/{chapterId}");
+                    // Checks if the response is successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read the content of the response as a string
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        Console.WriteLine("Response:");
+                        Console.WriteLine(responseBody);
+
+                        return responseBody;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}");
+                        return null;
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+
+                    Console.WriteLine($"Request failed: {ex.Message}");
+                    return null;
+                }
+            }
+        }
     }
 
 

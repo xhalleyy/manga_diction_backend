@@ -80,6 +80,24 @@ namespace manga_diction_backend.Services
             return ClubMembers;
         }
 
+        public IActionResult GetUserStatusInClub(int clubId, int userId)
+        {
+            try
+            {
+                var member = _context.MemberInfo.SingleOrDefault(m => m.ClubId == clubId && m.UserId == userId);
+                if (member == null)
+                {
+                    return Ok(new { Status = 10 });
+                }
+
+                // Return the status code or status information based on your logic
+                return Ok(new { Status = member.Status }); // Assuming Status is an integer property in MemberModel
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while processing the request.");
+            }
+        }
         // GET INVITED REQUESTS BY USER ID
 
 

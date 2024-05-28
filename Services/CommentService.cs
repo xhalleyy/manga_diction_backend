@@ -41,6 +41,7 @@ namespace manga_diction_backend.Services
 
         public async Task<ActionResult<List<UserCommentDTO>>> GetUserComments(int userId)
         {
+            //post id or comment id, object: comment id, profilepic, username,
             var userComments = await _context.CommentInfo
                 .Where(c => c.UserId == userId)
                 .Include(c => c.User)
@@ -48,6 +49,7 @@ namespace manga_diction_backend.Services
                 {
                     UserId = c.User.ID,
                     Username = c.User.Username,
+                    ProfilePicture = _context.UserInfo.SingleOrDefault(user => user.ID == c.User.ID).ProfilePic,
                     Comments = new List<CommentDTO>
                     {
                 new CommentDTO

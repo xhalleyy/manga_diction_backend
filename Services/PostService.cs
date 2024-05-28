@@ -152,58 +152,63 @@ namespace manga_diction_backend.Services
         public async Task<ActionResult<List<PostWithLikesDTO>>> GetPostsByLikes(int clubId)
         {
             var postsWithLikes = await _context.PostInfo
-                    .Where(p => p.ClubId == clubId && !p.IsDeleted)
-                    .Select(p => new PostWithLikesDTO
+                .Where(p => p.ClubId == clubId && !p.IsDeleted)
+                .Select(p => new PostWithLikesDTO
+                {
+                    ClubId = p.ClubId,
+                    ClubName = _context.ClubInfo.FirstOrDefault(c => c.ID == p.ClubId) != null ? _context.ClubInfo.FirstOrDefault(c => c.ID == p.ClubId).ClubName : null,
+                    PostId = p.ID,
+                    Title = p.Title,
+                    Category = p.Category,
+                    Tags = p.Tags,
+                    Description = p.Description,
+                    Image = p.Image,
+                    DateCreated = DateTime.Parse(p.DateCreated),
+                    DateUpdated = DateTime.Parse(p.DateUpdated),
+                    IsDeleted = p.IsDeleted,
+                    LikeCount = _context.LikesInfo.Count(l => l.PostId == p.ID),
+                    User = new UserModel
                     {
-                        PostId = p.ID,
-                        Title = p.Title,
-                        Category = p.Category,
-                        Tags = p.Tags,
-                        Description = p.Description,
-                        Image = p.Image,
-                        DateCreated = DateTime.Parse(p.DateCreated),
-                        DateUpdated = DateTime.Parse(p.DateUpdated),
-                        LikeCount = _context.LikesInfo.Count(l => l.PostId == p.ID),
-                        User = new UserModel
-                        {
-                            ID = p.UserId,
-                            Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username,
-                            ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic
-                        }
-                    })
-                    .OrderByDescending(p => p.LikeCount)
-                    .ToListAsync();
-
+                        ID = p.UserId,
+                        Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId) != null ? _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username : null,
+                        ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId) != null ? _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic : null
+                    }
+                })
+                .OrderByDescending(p => p.LikeCount)
+                .ToListAsync();
             return Ok(postsWithLikes);
         }
 
         public async Task<ActionResult<List<PostWithCommentCountDTO>>> GetPostsByComments(int clubId)
         {
             var postsWithCommentCount = await _context.PostInfo
-                    .Where(p => p.ClubId == clubId && !p.IsDeleted)
-                    .Select(p => new PostWithCommentCountDTO
+                .Where(p => p.ClubId == clubId && !p.IsDeleted)
+                .Select(p => new PostWithCommentCountDTO
+                {
+                    ClubId = p.ClubId,
+                    ClubName = _context.ClubInfo.FirstOrDefault(c => c.ID == p.ClubId) != null ? _context.ClubInfo.FirstOrDefault(c => c.ID == p.ClubId).ClubName : null,
+                    PostId = p.ID,
+                    Title = p.Title,
+                    Category = p.Category,
+                    Tags = p.Tags,
+                    Description = p.Description,
+                    Image = p.Image,
+                    DateCreated = DateTime.Parse(p.DateCreated),
+                    DateUpdated = DateTime.Parse(p.DateUpdated),
+                    IsDeleted = p.IsDeleted,
+                    CommentCount = _context.CommentInfo.Count(c => c.PostId == p.ID),
+                    User = new UserModel
                     {
-                        PostId = p.ID,
-                        Title = p.Title,
-                        Category = p.Category,
-                        Tags = p.Tags,
-                        Description = p.Description,
-                        Image = p.Image,
-                        DateCreated = DateTime.Parse(p.DateCreated),
-                        DateUpdated = DateTime.Parse(p.DateUpdated),
-                        IsDeleted = p.IsDeleted,
-                        CommentCount = _context.CommentInfo.Count(c => c.PostId == p.ID),
-                        User = new UserModel
-                        {
-                            ID = p.UserId,
-                            Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username,
-                            ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic
-                        }
-                    })
-                    .OrderByDescending(p => p.CommentCount)
-                    .ToListAsync();
+                        ID = p.UserId,
+                        Username = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId) != null ? _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).Username : null,
+                        ProfilePic = _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId) != null ? _context.UserInfo.FirstOrDefault(u => u.ID == p.UserId).ProfilePic : null
+                    }
+                })
+                .OrderByDescending(p => p.CommentCount)
+                .ToListAsync();
 
             return Ok(postsWithCommentCount);
         }
+
     }
 }

@@ -20,9 +20,9 @@ namespace manga_diction_backend.Models
         public string? ProfilePic { get; set; }
         // public string Password { get; set; }
         // To not display Salt and Hash when I retrieve the likes
-        // [JsonIgnore]
+        [JsonIgnore]
         public string? Salt { get; set; }
-        // [JsonIgnore]
+        [JsonIgnore]
         public string? Hash { get; set; }
         public UserModel()
         {
