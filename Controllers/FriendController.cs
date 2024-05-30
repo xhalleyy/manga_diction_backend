@@ -50,7 +50,11 @@ namespace manga_diction_backend.Controllers
             return _data.GetAcceptedFriends(userId);
         }
 
-
+        [HttpDelete]
+        [Route("DeleteFriend/{userId}/{friendId}")]
+        public IActionResult DeleteFriend(int userId, int friendId){
+            return _data.DeleteFriend(userId, friendId);
+        }
 
     }
 }

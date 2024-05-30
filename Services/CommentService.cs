@@ -177,7 +177,7 @@ namespace manga_diction_backend.Services
                     return NotFound("Reply not found.");
                 }
 
-                replyToUpdate.Reply = reply; // Update the reply content with the provided string
+                replyToUpdate.Reply = reply; 
 
                 _context.CommentInfo.Update(replyToUpdate);
                 await _context.SaveChangesAsync();

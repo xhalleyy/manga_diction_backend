@@ -106,10 +106,10 @@ namespace manga_diction_backend.Services
                     ClubName = c.ClubName,
                     Image = c.Image,
                     Description = c.Description,
-                    DateCreated = c.DateCreated, // Assuming DateCreated is a string in ClubModel
+                    DateCreated = c.DateCreated, 
                     isMature = c.isMature,
                     IsPublic = c.IsPublic,
-                    IsDeleted = c.IsDeleted // Assuming IsDeleted is also in ClubModel
+                    IsDeleted = c.IsDeleted 
                 })
                 .OrderByDescending(c => _context.MemberInfo.Count(m => m.ClubId == c.ID && m.Status == MemberStatus.Accepted))
                 .Take(6)

@@ -111,5 +111,30 @@ namespace manga_diction_backend.Services
             return Ok(acceptedFriendsWithUserModel);
         }
 
+        public IActionResult DeleteFriend(int userId, int friendId)
+        {
+            try
+            {
+                var friendRelationship = _context.FriendInfo.FirstOrDefault(f =>
+                    (f.UserId == userId && f.FriendId == friendId) ||
+                    (f.UserId == friendId && f.FriendId == userId));
+
+                if (friendRelationship != null)
+                {
+                    _context.FriendInfo.Remove(friendRelationship);
+                    _context.SaveChanges();
+                    return Ok("Friend relationship deleted successfully.");
+                }
+                else
+                {
+                    return NotFound("Friend relationship not found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
     }
 }

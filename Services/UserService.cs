@@ -97,9 +97,9 @@ namespace manga_diction_backend.Services
                     var tokeOptions = new JwtSecurityToken(
                         issuer: "http://localhost:5000",
                         audience: "http://localhost:5000",
-                        claims: new List<Claim>(), // Claims can be added here if needed
-                        expires: DateTime.Now.AddMinutes(30), // Set token expiration time (e.g., 30 minutes)
-                        signingCredentials: signinCredentials // Set signing credentials
+                        claims: new List<Claim>(), 
+                        expires: DateTime.Now.AddMinutes(30), 
+                        signingCredentials: signinCredentials 
                     );
 
                     // Generate JWT token as a string
@@ -182,8 +182,19 @@ namespace manga_diction_backend.Services
                 user.Salt = newHashedPassword.Salt;
             }
 
+            // Check if the new username already exists
+            if (!string.IsNullOrEmpty(model.Username) && model.Username != user.Username)
+            {
+                var existingUserWithUsername = _context.UserInfo.FirstOrDefault(u => u.Username == model.Username);
+                if (existingUserWithUsername != null)
+                {
+                    return Conflict("Username already exists");
+                }
+
+                user.Username = model.Username;
+            }
+
             // Update other user properties
-            if (!string.IsNullOrEmpty(model.Username)) user.Username = model.Username;
             if (!string.IsNullOrEmpty(model.FirstName)) user.FirstName = model.FirstName;
             if (!string.IsNullOrEmpty(model.LastName)) user.LastName = model.LastName;
             if (model.Age.HasValue) user.Age = model.Age.Value;

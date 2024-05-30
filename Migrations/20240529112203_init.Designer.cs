@@ -12,7 +12,7 @@ using manga_diction_backend.Services.Context;
 namespace fullstackbackend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240528104203_init")]
+    [Migration("20240529112203_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -407,9 +407,9 @@ namespace fullstackbackend.Migrations
                             ID = 1,
                             Age = 24,
                             FirstName = "halley",
-                            Hash = "PSFlappnv8ftPMmBorSedBnGjELhA2h5ikV9PAWCYYAa50jVrpoQXpHXJbftdCY6NwA7U0HxCtBhHFVnDFZxsyR8TTrd8oGEdBkruklbdptSNvowrpq2qpugljyJVOXbBafuSicn3GA62uRIUa5CSaEpjRd1gG+puZmTse/nYAyjCmFI5cOhuz1aaQe3/uHdtuKppuR3uJOcQrUlv1dVNzsBt1Y59YIVX3dzMx3BGSuGnnjJq6wTAFxl/Z20pD7xI3GmpvMZ3yjvA2MOTDaBifakzGZ8bnrkM3GPjXyO5juBiYsZqbXRLIYX/V+BHPXcjK6DCp9Hqaqpjz5Vs8WT4w==",
+                            Hash = "MYGwrD+IpxAU3sAsMzYkB824c72f6q3qqZ6DVeLn+XNhilTuCwCyPD2L8bOd/m3Mwa4dW/PVPGXhgN86wpYlEeWTfC3GFKLY4qgY5URSxQ6Sp+5N0I+Z+wNu9OmUj8gM3RDH27Cx6EP37+EAD9vZ34LWuXfDcMSB8oERSTGTnzel2yzbiOE4Mfd03ExP+7Njp2dKtemAT7y7U0Rj+A0UfcVsma1IPhdZTCK4eXu8CTp052IwKR3ngP8VGFnjMgV8I9RMFb2wlihz1o7jXWwVJql3Js1sCUNguVd/yftd+iyCMRjmbzM5qKaSyEVO0bOj8LGyPXSG81xsSzlq7KtLYw==",
                             LastName = "pham",
-                            Salt = "NFYMofXzkPjSPPBVSiV2o2YfemXRK5gXO5D6qpq3Q4omSN2QWRZ9okLKHFEI5x5/HehWFpVa3IB6Se2rTXFz5w==",
+                            Salt = "/30Q+tbEfHNYV+VcY1x7a31f4XmOVA2yzroBOtjmH7wrp7YmdfL0NDEuVHgGi4P4IkpsVuG9EWJd2urVNqmbzw==",
                             Username = "halley"
                         },
                         new
@@ -417,9 +417,9 @@ namespace fullstackbackend.Migrations
                             ID = 2,
                             Age = 26,
                             FirstName = "sinatha",
-                            Hash = "5W7eYQVwy46nN1Kbw1xD6Joia04j9fKQ34xmp/HXMl9ecr7LZKLdnbabRbhKjmivAGKS3MFgY+63+z3jwyCvmrpzGFLW2r/e2EAlA3KJQyiCksMQOqGHTqEyRmLTbERhR4OctvM3ayoIgrCPssbZY39Ul0sJ3/9L8YxWoQL8IWGGjk4elh0L44fLy66O6yAN5FTZ7yXVUYK78Zj1dDAc8t/UPL3WZQFGBQvKXjWg+bNUlDAOQ9cvSL7DaIE9iLUQyobabQXNvGR610ECuq6PhQB2exC+dgKp9NPYuDLBrZvQNAunjBARm0Uce4w60xiam3HVeZqsEhZBhkqgxEEMDQ==",
+                            Hash = "fT+cOf3xNyRCVGcPJEQxJPHail6WHIOuIiWZeMIfxoI/nogga3T/c5/ICdXTaWvksz8IztKx3sdZaMp0NvWuNRs9F40ThehO5eJjzvjvwaOa0JAY041iNykhv7iAF4WTTzouXjIogKrB3ytMsSQKcsQw+nVk5w0HMp485HF0Vgio+5kK107RafTXW84VJ0/9lh+mFoWRk/N+owXbVC6QIKo0E/9N3Au97IY7lDbKdHgkzyOt+QK/KTmKLevK85ZD2rqeJ5+CPrgOUHJHbhgmaqepxRec0Z0v6vKossEvh64pMAl+VDKCibUHCCQSTIIvv3/ZBNOJEYCkH7o0CpdisA==",
                             LastName = "chin",
-                            Salt = "NxLWGIL6vGU220txp/GXGs144iMqXkQkRSuNX/ORZHGC/cxVcMEDNOuK+7w/3lxP6mAUFFXCD+cVdypK2TmY4g==",
+                            Salt = "CRAotl001YDT/5efujzfPNZgRgsHrMX245qm4UdYEAywoKS7Q/50TjGqtagexEvicAMG6aesvktSh9Ockjo2KA==",
                             Username = "sinatha"
                         },
                         new
@@ -427,9 +427,9 @@ namespace fullstackbackend.Migrations
                             ID = 3,
                             Age = 22,
                             FirstName = "avery",
-                            Hash = "xBp/Z30KHEtPWYcgo7MrufRCSvgrtKBZ5xQqSTIn5ghTG5o+vj2bnrwalRpI3SbLIgT1XlGzRPOtjx4Aka7E8NPPtreqDLrcz0dc4OS4e4BGZ1SDhByokm0I3SOUJX3KKwbW3m4zGgkD6ctUGLqcrrmHnDsm3WN+tmGaW5xnFadlr+InxME4BdgVmB8jreLyMx60sFUXvNdmGKPC/jHA270YusRCGH2CljHKsL2moZWI/xDABUm7WaBKorrO2B22hkcH3tHNJcdkKjhHG5OzFTSj074wT7EaB5Spprqq2Cu7hRfZSfNe8Igc0ySAMojxk0jRYm+3nADHz2/GsFlwJQ==",
+                            Hash = "NiYV4qFQHnsPgQCkcQLNujA0y1lOP7ak0PEqkhjUdpvDMQGWVcntx0QBPpuW8QFF0wOz4ugE8qacLUHCMsfYcCEqTd1Trhg29/LzcnIXHsIcyx+MVH+0UXTL4X8KFUSQ1dfdnVdlWx3/BoVrX6ue1Nm1AW00wFkr/Uku+IAzphr/yl2J6eXf9ZUdOODS2YOumOWrrl1PYWs+se9PrzGsZUnnNXYdnw8DlxuM+kkPUx+M2w0du++B9B6y/hsI32l3GBsj7QSA89DS+962hk0MOlinQgv3KO+892xD0hGeTSg/1M2/IS5s7J8yaoFbh0VJsanrke8pEua55VFzFgeodQ==",
                             LastName = "hillstrom",
-                            Salt = "2cwSsNNBcTbUB9ut3H4KOQLNCsXIgD79BHozo5sYBfi0PUJd4TozcI8UM+xkT3TDIxrP/SwJFzBSqKQbR2RZYA==",
+                            Salt = "vYsW/2t4uzl5B4xJif8NR1jsDjOOg81fuRALEWnr5ZDRxSJGHe0P0j2940TX0sEbm/IRu48o4DByngNVhhmRjQ==",
                             Username = "avery"
                         });
                 });
